@@ -2,7 +2,7 @@ package com.lh.kamusi.metier.services;
 
 import java.util.List;
 
-import com.lh.kamusi.metier.domain.LigneDictionnaire;
+import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
 
 /**
  * @author asoilihi
@@ -14,29 +14,29 @@ public interface IDictionnaireServices {
 	 * @param motCle
 	 * @return List<LigneDictionnaire>
 	 */
-	List<LigneDictionnaire> listerLesmotsFr(String motCle); 
+	List<LigneDictionnaireForm> listerLesmotsFr(String motCle); 
 	
 	/**
 	 * @param ligneDictionnaire
 	 * @return LigneDictionnaire
 	 */
-	LigneDictionnaire ajouterUneLigneDictionnaire(LigneDictionnaire ligneDictionnaire); 
+	LigneDictionnaireForm ajouterUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
 	
 	/**
 	 * @param ligneDictionnaire
 	 * @return LigneDictionnaire
 	 */
-	LigneDictionnaire validerUneLigneDictionnaire(LigneDictionnaire ligneDictionnaire); 
+	LigneDictionnaireForm validerUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
 	
 	/**
 	 * @param ligneDictionnaire
 	 */
-	void supprimerUneLigneDictionnaire(LigneDictionnaire ligneDictionnaire); 
+	void supprimerUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
 	
 	/**
 	 * @param ligneDictionnaire
 	 */
-	void modifierUneLigneDictionnaire(LigneDictionnaire ligneDictionnaire); 
+	void modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
 	
 
 }

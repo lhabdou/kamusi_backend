@@ -23,7 +23,7 @@ public class LigneDictionnaireEntite implements Serializable {
 	@EmbeddedId
 	private Dictionnaire_PK dictionnairePk; 
 	
-	@Column(name="mot_com")
+	@Column(name="mot_ang")
     private String mot_ang;
 
     @Column(name = "mot_ndz")

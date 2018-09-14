@@ -11,7 +11,7 @@ import com.lh.kamusi.dao.entities.LigneDictionnaireEntite;
 public interface DictionnaireRepository extends JpaRepository<LigneDictionnaireEntite, String> {
 	
 	
-	@Query("select * from LigneDictionnaire where mot_fr like %:motCle%") 
+	@Query("select d from LigneDictionnaireEntite d where mot_fr LIKE CONCAT('%',:motCle,'%')") 
 	List<LigneDictionnaireEntite> listerLesMots(@Param("motCle") String motCle); 
 	
 	

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lh.kamusi.metier.domain.LigneDictionnaire;
+import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
 import com.lh.kamusi.metier.services.IDictionnaireServices;
 
 @RestController
@@ -32,7 +32,7 @@ public class DictionnaireRestController {
 	 * @return ResponseEntity<List<LigneDictionnaire>>
 	 */
 	@RequestMapping(value = "/rechercher/{motCle}", method = RequestMethod.GET)
-	public ResponseEntity<List<LigneDictionnaire>> listerLesMotsFr(@PathVariable("motCle") String motCle) {
+	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsFr(@PathVariable("motCle") String motCle) {
 		
 		return new ResponseEntity<>(dictionnaireServices.listerLesmotsFr(motCle), HttpStatus.OK); 
 		
