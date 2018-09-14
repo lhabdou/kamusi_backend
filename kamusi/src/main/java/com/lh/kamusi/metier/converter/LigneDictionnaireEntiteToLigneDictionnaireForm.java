@@ -14,7 +14,7 @@ public class LigneDictionnaireEntiteToLigneDictionnaireForm implements Converter
 		LigneDictionnaireForm dictionnaire = new LigneDictionnaireForm(); 
 		
 		dictionnaire.setMot_fr(dictionnaireEntite.getDictionnairePk().getMot_fr());
-		dictionnaire.setMot_com(dictionnaireEntite.getDictionnairePk().getMot_com());
+		dictionnaire.setMot_ngz(dictionnaireEntite.getDictionnairePk().getMot_ngz());
 		dictionnaire.setMot_ang(dictionnaireEntite.getMot_ang());
 		dictionnaire.setMot_ndz(dictionnaireEntite.getMot_ndz());
 		dictionnaire.setMot_mao(dictionnaireEntite.getMot_mao());

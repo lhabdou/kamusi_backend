@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Utilisateurs")
+@Table(name = "Utilisateur")
 public class UtilisateurEntite implements Serializable {
 
 	/**
@@ -24,7 +24,7 @@ public class UtilisateurEntite implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Integer id_utilisateur;
+	private Long id_utilisateur;
 
 	@Column(name = "nom")
 	private String nom;
@@ -50,14 +50,14 @@ public class UtilisateurEntite implements Serializable {
 	/**
 	 * @return the id_utilisateur
 	 */
-	public Integer getId_utilisateur() {
+	public Long getId_utilisateur() {
 		return id_utilisateur;
 	}
 
 	/**
 	 * @param id_utilisateur the id_utilisateur to set
 	 */
-	public void setId_utilisateur(Integer id_utilisateur) {
+	public void setId_utilisateur(Long id_utilisateur) {
 		this.id_utilisateur = id_utilisateur;
 	}
 

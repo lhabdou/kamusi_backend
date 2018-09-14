@@ -17,7 +17,7 @@ public class LigneDictionnaireFormToLigneDictionnaireEntite implements Converter
 		
 		Dictionnaire_PK dictionnairePk = new Dictionnaire_PK();
 		dictionnairePk.setMot_fr(dictionnaireForm.getMot_fr());
-		dictionnairePk.setMot_com(dictionnaireForm.getMot_com());
+		dictionnairePk.setMot_ngz(dictionnaireForm.getMot_ngz());
 		dictionnaireEntite.setDictionnairePk(dictionnairePk );
 		dictionnaireEntite.setMot_ang(dictionnaireForm.getMot_ang());
 		dictionnaireEntite.setMot_ndz(dictionnaireForm.getMot_ndz());
