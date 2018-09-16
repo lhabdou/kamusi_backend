@@ -1,5 +1,6 @@
 package com.lh.kamusi.metier.converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +9,9 @@ import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
 
 @Component
 public class LigneDictionnaireEntiteToLigneDictionnaireForm implements Converter<LigneDictionnaireEntite, LigneDictionnaireForm> {
+	
+	@Autowired
+	UtilisateurEntiteToUtilisateurForm utilisateurConvert; 
 	
 	@Override
 	public LigneDictionnaireForm convert(LigneDictionnaireEntite dictionnaireEntite) {
@@ -21,7 +25,8 @@ public class LigneDictionnaireEntiteToLigneDictionnaireForm implements Converter
 		dictionnaire.setMot_mwa(dictionnaireEntite.getMot_mwa());
 		dictionnaire.setSuggestion(dictionnaireEntite.getSuggestion());
 		dictionnaire.setDefinition_com(dictionnaireEntite.getDefinition_com());
-		dictionnaire.setDefinition_fr(dictionnaireEntite.getDefinition_fr());	
+		dictionnaire.setDefinition_fr(dictionnaireEntite.getDefinition_fr());
+		dictionnaire.setUtilisateur(utilisateurConvert.convert(dictionnaireEntite.getUtilisateur()));
 		
 		return dictionnaire;
 	}
