@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Statuts")
+@Table(name = "Statut")
 public class StatutEntite implements Serializable {
 	/**
 	 * 

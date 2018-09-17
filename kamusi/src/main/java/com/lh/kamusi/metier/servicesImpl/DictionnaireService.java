@@ -33,7 +33,7 @@ public class DictionnaireService implements IDictionnaireServices {
 	@Override
 	public List<LigneDictionnaireForm> listerLesmotsFr(String motCle) {
 		
-		List<LigneDictionnaireEntite> lignesDictionnaireEntites = dictionnaireRepository.listerLesMots(motCle);
+		List<LigneDictionnaireEntite> lignesDictionnaireEntites = dictionnaireRepository.listerLesMots(motCle.toLowerCase());
 		
 		List<LigneDictionnaireForm> ligneDictionnaireForms = new ArrayList<>();
 		

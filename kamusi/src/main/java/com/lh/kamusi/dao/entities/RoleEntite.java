@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "Roles")
+@Table(name = "Role")
 public class RoleEntite implements Serializable {
 	/**
 	 * 

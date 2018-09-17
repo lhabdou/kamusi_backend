@@ -18,7 +18,7 @@ public class LigneDictionnaireForm implements Serializable {
 
 	private String mot_fr;
 	
-    private String mot_com;
+    private String mot_ngz;
 	
 	private String mot_ang;
 
@@ -52,18 +52,14 @@ public class LigneDictionnaireForm implements Serializable {
 		this.mot_fr = mot_fr;
 	}
 
-	/**
-	 * @return the mot_com
-	 */
-	public String getMot_com() {
-		return mot_com;
+
+
+	public String getMot_ngz() {
+		return mot_ngz;
 	}
 
-	/**
-	 * @param mot_com the mot_com to set
-	 */
-	public void setMot_com(String mot_com) {
-		this.mot_com = mot_com;
+	public void setMot_ngz(String mot_ngz) {
+		this.mot_ngz = mot_ngz;
 	}
 
 	/**

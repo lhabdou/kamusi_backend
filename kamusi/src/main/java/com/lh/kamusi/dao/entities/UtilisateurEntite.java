@@ -1,20 +1,19 @@
 package com.lh.kamusi.dao.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Utilisateurs")
+@Table(name = "Utilisateur")
 public class UtilisateurEntite implements Serializable {
 
 	/**
@@ -24,7 +23,7 @@ public class UtilisateurEntite implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Integer id_utilisateur;
+	private Long id_utilisateur;
 
 	@Column(name = "nom")
 	private String nom;
@@ -41,23 +40,21 @@ public class UtilisateurEntite implements Serializable {
 	@Column(name = "url_image")
 	private String url_image;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "utilisateurs_has_roles", joinColumns = {
-			@JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur") }, inverseJoinColumns = {
-					@JoinColumn(name = "id_role", referencedColumnName = "id") })
-	private List<RoleEntite> roles;
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_role")
+	private RoleEntite role;
 
 	/**
 	 * @return the id_utilisateur
 	 */
-	public Integer getId_utilisateur() {
+	public Long getId_utilisateur() {
 		return id_utilisateur;
 	}
 
 	/**
 	 * @param id_utilisateur the id_utilisateur to set
 	 */
-	public void setId_utilisateur(Integer id_utilisateur) {
+	public void setId_utilisateur(Long id_utilisateur) {
 		this.id_utilisateur = id_utilisateur;
 	}
 
@@ -132,17 +129,17 @@ public class UtilisateurEntite implements Serializable {
 	}
 
 	/**
-	 * @return the roles
+	 * @return the role
 	 */
-	public List<RoleEntite> getRoles() {
-		return roles;
+	public RoleEntite getRole() {
+		return role;
 	}
 
 	/**
-	 * @param roles the roles to set
+	 * @param role the role to set
 	 */
-	public void setRoles(List<RoleEntite> roles) {
-		this.roles = roles;
+	public void setRole(RoleEntite role) {
+		this.role = role;
 	}
 	
 	

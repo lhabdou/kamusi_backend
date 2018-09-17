@@ -2,10 +2,13 @@ package com.lh.kamusi.dao.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lh.kamusi.dao.entities.pk.Dictionnaire_PK;
@@ -43,10 +46,12 @@ public class LigneDictionnaireEntite implements Serializable {
     
     @Column(name="definition_com")
     private String definition_com; 
-     
-    @JoinColumn(name = "id_utilisateur")
+    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_utilisateur", nullable = false)
     private UtilisateurEntite utilisateur;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_statut")
     private StatutEntite statut;
 
