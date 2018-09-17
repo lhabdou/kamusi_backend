@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
-import com.lh.kamusi.metier.services.IDictionnaireServices;
+import com.lh.kamusi.metier.services.IDictionnaireService;
 
 @RestController
 @RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -22,7 +22,7 @@ public class DictionnaireRestController {
 	 * le service archiveResearchService
 	 */
 	@Autowired
-	private IDictionnaireServices dictionnaireServices;
+	private IDictionnaireService dictionnaireServices;
 	
 	
 	/**

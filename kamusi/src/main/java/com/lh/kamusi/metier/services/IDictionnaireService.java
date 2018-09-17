@@ -8,13 +8,18 @@ import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
  * @author asoilihi
  *
  */
-public interface IDictionnaireServices {
+public interface IDictionnaireService {
 	
 	/**
 	 * @param motCle
 	 * @return List<LigneDictionnaire>
 	 */
 	List<LigneDictionnaireForm> listerLesmotsFr(String motCle); 
+	
+	/**
+	 * @return List<LigneDictionnaire>
+	 */
+	List<LigneDictionnaireForm> listerLesmotsAvalider(); 
 	
 	/**
 	 * @param ligneDictionnaire
@@ -26,7 +31,7 @@ public interface IDictionnaireServices {
 	 * @param ligneDictionnaire
 	 * @return LigneDictionnaire
 	 */
-	LigneDictionnaireForm validerUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
+	LigneDictionnaireForm validerUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire, Boolean motComModifie); 
 	
 	/**
 	 * @param ligneDictionnaire

@@ -1,5 +1,8 @@
 package com.lh.kamusi.metier.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -14,6 +17,9 @@ public class UtilisateurEntiteToUtilisateurForm implements Converter<Utilisateur
 	@Autowired
 	RoleEntiteToRoleForm roleConvert;
 	
+	/** (non-Javadoc)
+	 * @see org.springframework.core.convert.converter.Converter#convert(java.lang.Object)
+	 */
 	@Override
 	public UtilisateurForm convert(UtilisateurEntite utilisateurEntite) {
 		UtilisateurForm utilisateurForm = new UtilisateurForm(); 
@@ -28,5 +34,18 @@ public class UtilisateurEntiteToUtilisateurForm implements Converter<Utilisateur
 		utilisateurForm.setRole(roleConvert.convert(utilisateurEntite.getRole()));
 		
 		return utilisateurForm;
+	}
+
+	/**
+	 * @param listEntite
+	 * @return List<UtilisateurForm>
+	 */
+	public List<UtilisateurForm> convertList(List<UtilisateurEntite> listEntite) {
+		List<UtilisateurForm> utilisateurForms = new ArrayList<>(); 
+		
+		for (UtilisateurEntite entite : listEntite) {
+			utilisateurForms.add(convert(entite)); 
+		}
+		return utilisateurForms;
 	}
 }

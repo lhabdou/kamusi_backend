@@ -1,7 +1,7 @@
-﻿INSERT INTO public.role (id, nom_role) VALUES (1,'Administrateur');
+INSERT INTO public.role (id, nom_role) VALUES (1,'Administrateur');
 
-INSERT INTO public.utilisateur (id_utilisateur, nom, prenom, pseudo, email) VALUES (
-1, 'SOILIHI', 'Abdoulhalim', 'Lhabdou', 'lhabdou26@hotmail.fr');
+INSERT INTO public.utilisateur (id_utilisateur, nom, prenom, pseudo, email, id_role) VALUES (
+1, 'SOILIHI', 'Abdoulhalim', 'Lhabdou', 'lhabdou26@hotmail.fr',1);
 
 INSERT INTO public.statut (id_statut, statut) VALUES (1,'Nouveau'); 
 
@@ -14,3 +14,4 @@ INSERT INTO public.dictionnaire(
             1, NULL, 'Action de macher et avaler', 'Ndo wu trafougna bahindru mdrou ya mize'),
             ('Marcher', 'Hwenda', 'Tsendra', 'Hwendra', 'Hwendra', 'To Walk', 1, 
             1, NULL, 'Se déplacer à pied', 'Ndo wu badili makazi ha wurimiya yé mindou');
+
