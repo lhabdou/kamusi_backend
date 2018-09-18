@@ -41,7 +41,7 @@ public interface IDictionnaireService {
 	/**
 	 * @param ligneDictionnaire
 	 */
-	void modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
+	LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
 	
 
 }

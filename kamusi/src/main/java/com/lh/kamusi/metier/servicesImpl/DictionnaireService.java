@@ -108,9 +108,10 @@ public class DictionnaireService implements IDictionnaireService {
 	 *      modifierUneLigneDictionnaire(com.lh.kamusi.metier.domain.LigneDictionnaireForm)
 	 */
 	@Override
-	public void modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire) {
-		
-		dictionnaireRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire));
+	public LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire) {
+
+		return dictionnaireEntiteToDictionnaireForm.convert(
+				dictionnaireRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
 	}
 

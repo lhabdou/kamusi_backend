@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +28,9 @@ public class UtilisateurRestController {
 	
 	
 	/**
-	 * lister les mots en français
+	 * Lister les utilisateurs 
 	 * 
-	 * @param motCle
+	 * @param role
 	 * @return ResponseEntity<List<LigneDictionnaire>>
 	 */
 	@RequestMapping(value = "/utilisateurs/{role}", method = RequestMethod.GET)
@@ -38,5 +39,32 @@ public class UtilisateurRestController {
 		return new ResponseEntity<>(utilisateurService.listerLesUtilisateurs(role), HttpStatus.OK); 
 		
 	}
+	
+	/**
+	 * Ajouter un Utilisateur 
+	 * 
+	 * @param utilisateurForm
+	 * @return ResponseEntity<UtilisateurForm>
+	 */
+	@RequestMapping(value = "/utilisateurs/nouveau", method = RequestMethod.POST)
+	public ResponseEntity<UtilisateurForm> ajouterUnUtilisateur(@RequestBody UtilisateurForm utilisateurForm) {
+		
+		return new ResponseEntity<>(utilisateurService.ajouterUtilisateur(utilisateurForm), HttpStatus.OK); 
+		
+	}
+	
+	/**
+	 * Supprimer un utilisateur
+	 * 
+	 * @param utilisateurForm
+	 * @return ResponseEntity<UtilisateurForm>
+	 */
+	@RequestMapping(value = "/utilisateurs/supprimer", method = RequestMethod.DELETE)
+	public void supprimerUnUtilisateur(@RequestBody UtilisateurForm utilisateurForm) {
+		
+		 utilisateurService.supprimerUtilisateur(utilisateurForm);
+		 
+	}
+
 
 }
