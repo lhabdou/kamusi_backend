@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 
 @Entity
 @Table(name = "Role")
@@ -18,7 +20,8 @@ public class RoleEntite implements Serializable {
 	private static final long serialVersionUID = 1840988826663197404L;
 
 	@Id
-	@GeneratedValue
+	@GenericGenerator(name="increment", strategy="increment")
+	@GeneratedValue(generator="increment")
 	@Column(name ="id")
     private Integer id;
 

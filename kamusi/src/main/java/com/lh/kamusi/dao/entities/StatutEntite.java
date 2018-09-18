@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "Statut")
 public class StatutEntite implements Serializable {
@@ -17,7 +19,8 @@ public class StatutEntite implements Serializable {
 	private static final long serialVersionUID = 9187279696761858059L;
 
 	@Id
-	@GeneratedValue
+	@GenericGenerator(name="increment", strategy="increment")
+	@GeneratedValue(generator="increment")
     private Integer id_statut;
 	
 	@Column(name="statut")
