@@ -5,6 +5,8 @@ package com.lh.kamusi.metier.servicesImpl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.lh.kamusi.metier.domain.RoleForm;
 import com.lh.kamusi.metier.services.IRoleService;
 
@@ -12,6 +14,7 @@ import com.lh.kamusi.metier.services.IRoleService;
  * @author asoilihi
  *
  */
+@Service
 public class StatutService implements IRoleService {
 
 	/** (non-Javadoc)

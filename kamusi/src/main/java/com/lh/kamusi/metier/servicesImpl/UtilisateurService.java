@@ -6,6 +6,7 @@ package com.lh.kamusi.metier.servicesImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.lh.kamusi.dao.entities.UtilisateurEntite;
 import com.lh.kamusi.dao.repository.UtilisateurRepository;
@@ -18,6 +19,7 @@ import com.lh.kamusi.metier.services.IUtilisateurService;
  * @author asoilihi
  *
  */
+@Service
 public class UtilisateurService implements IUtilisateurService {
 
 	@Autowired

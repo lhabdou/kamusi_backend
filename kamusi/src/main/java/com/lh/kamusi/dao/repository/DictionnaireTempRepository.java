@@ -11,7 +11,7 @@ import com.lh.kamusi.dao.entities.LigneDictionnaireEntite;
 public interface DictionnaireTempRepository extends JpaRepository<LigneDictionnaireEntite, String> {
 	
 	
-	@Query("select * from DictionnaireTempEntite d"
+	@Query("select d from DictionnaireTempEntite d "
 			+ "left join fetch d.utilisateur u") 
 	List<DictionnaireTempEntite> listerLesMots(); 
 	

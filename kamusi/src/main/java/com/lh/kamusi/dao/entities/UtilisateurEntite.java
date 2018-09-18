@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -22,7 +23,8 @@ public class UtilisateurEntite implements Serializable {
 	private static final long serialVersionUID = -7966650235494300375L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	@Column(name="id_utilisateur")
 	private Long id_utilisateur;
 
 	@Column(name = "nom")
@@ -34,7 +36,7 @@ public class UtilisateurEntite implements Serializable {
 	@Column(name = "pseudo")
 	private String pseudo;
 
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@Column(name = "url_image")

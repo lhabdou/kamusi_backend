@@ -37,6 +37,8 @@ public class LigneDictionnaireForm implements Serializable {
     private UtilisateurForm utilisateur;
 
     private StatutForm statut;
+    
+    private boolean motComModifie; 
 
 	/**
 	 * @return the mot_fr
@@ -187,6 +189,20 @@ public class LigneDictionnaireForm implements Serializable {
 	public void setStatut(StatutForm statut) {
 		this.statut = statut;
 	}
-    
 
+	/**
+	 * @return the motComModifie
+	 */
+	public boolean isMotComModifie() {
+		return motComModifie;
+	}
+
+	/**
+	 * @param motComModifie the motComModifie to set
+	 */
+	public void setMotComModifie(boolean motComModifie) {
+		this.motComModifie = motComModifie;
+	}
+    
+	
 }

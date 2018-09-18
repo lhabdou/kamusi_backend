@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
-import com.lh.kamusi.metier.services.IDictionnaireService;
+import com.lh.kamusi.metier.domain.UtilisateurForm;
+import com.lh.kamusi.metier.services.IUtilisateurService;
 
 @RestController
 @RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class DictionnaireRestController {
+public class UtilisateurRestController {
+	
 	
 	/**
-	 * le service dictionnaireService
+	 * le service 
 	 */
 	@Autowired
-	private IDictionnaireService dictionnaireServices;
+	private IUtilisateurService utilisateurService;
 	
 	
 	/**
@@ -31,12 +32,11 @@ public class DictionnaireRestController {
 	 * @param motCle
 	 * @return ResponseEntity<List<LigneDictionnaire>>
 	 */
-	@RequestMapping(value = "/rechercher/{motCle}", method = RequestMethod.GET)
-	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsFr(@PathVariable("motCle") String motCle) {
+	@RequestMapping(value = "/utilisateurs/{role}", method = RequestMethod.GET)
+	public ResponseEntity<List<UtilisateurForm>> listerLesUtilisateursRole(@PathVariable("role") String role) {
 		
-		return new ResponseEntity<>(dictionnaireServices.listerLesmotsFr(motCle), HttpStatus.OK); 
+		return new ResponseEntity<>(utilisateurService.listerLesUtilisateurs(role), HttpStatus.OK); 
 		
 	}
-	
-	
+
 }

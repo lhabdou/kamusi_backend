@@ -11,9 +11,10 @@ import com.lh.kamusi.dao.entities.UtilisateurEntite;
 public interface UtilisateurRepository extends JpaRepository<UtilisateurEntite, Long> {
 	
 	
-	@Query("Select u from UtilisateurEntite u where lower(u.role.nom_role) = :role")
+	@Query("Select u from UtilisateurEntite u "
+			+ "inner join fetch u.role "
+			+ "where lower(u.role.nom_role) = :role")
 	List<UtilisateurEntite> listerLesUtilisateursRole(@Param("role")String role);
-	
 	
 
 }
