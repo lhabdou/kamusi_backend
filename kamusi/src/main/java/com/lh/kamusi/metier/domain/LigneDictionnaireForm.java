@@ -4,6 +4,7 @@
 package com.lh.kamusi.metier.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author asoilihi
@@ -39,6 +40,10 @@ public class LigneDictionnaireForm implements Serializable {
     private StatutForm statut;
     
     private boolean motComModifie; 
+    
+    private Date dateModification;
+    
+    private Date dateCreation;
 
 	/**
 	 * @return the mot_fr
@@ -202,6 +207,34 @@ public class LigneDictionnaireForm implements Serializable {
 	 */
 	public void setMotComModifie(boolean motComModifie) {
 		this.motComModifie = motComModifie;
+	}
+
+	/**
+	 * @return the dateModification
+	 */
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	/**
+	 * @param dateModification the dateModification to set
+	 */
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
+
+	/**
+	 * @return the dateCreation
+	 */
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	/**
+	 * @param dateCreation the dateCreation to set
+	 */
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
     
 	

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lh.kamusi.metier.servicesImpl;
+package com.lh.kamusi.metier.services.impl;
 
 import java.util.List;
 

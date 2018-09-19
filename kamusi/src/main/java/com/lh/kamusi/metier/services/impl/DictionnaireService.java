@@ -1,6 +1,7 @@
-package com.lh.kamusi.metier.servicesImpl;
+package com.lh.kamusi.metier.services.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,10 +110,29 @@ public class DictionnaireService implements IDictionnaireService {
 	 */
 	@Override
 	public LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire) {
+		
+		LigneDictionnaireForm ligneDictionnaireForm = new LigneDictionnaireForm();
+		
+		String role = ligneDictionnaireForm.getUtilisateur().getRole().getRole();
+		
+		
+		if("Administrateur".equalsIgnoreCase(role)) {
+			
+			ligneDictionnaire.getStatut().setStatut("Validé");
+			ligneDictionnaire.setDateModification(new Date());
+			
+			ligneDictionnaireForm =  dictionnaireEntiteToDictionnaireForm.convert(
+					dictionnaireRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
-		return dictionnaireEntiteToDictionnaireForm.convert(
-				dictionnaireRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
+		} else {
+				ligneDictionnaire.getStatut().setStatut("A valider");
+			ligneDictionnaireForm =  dictionnaireEntiteToDictionnaireForm.convert(
+					dictionnaireTempRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
+			
+		}
+
+		return ligneDictionnaireForm;
 	}
 
 	/**

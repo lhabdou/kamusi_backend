@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lh.kamusi.metier.servicesImpl;
+package com.lh.kamusi.metier.services.impl;
 
 import java.util.List;
 
@@ -15,11 +15,10 @@ import com.lh.kamusi.metier.services.IRoleService;
  *
  */
 @Service
-public class StatutService implements IRoleService {
+public class RoleService implements IRoleService {
 
 	/** (non-Javadoc)
-	 * @see com.lh.kamusi.metier.services.IRoleService#
-	 * listerLesRoles()
+	 * @see com.lh.kamusi.metier.services.IRoleService#listerLesRoles()
 	 */
 	@Override
 	public List<RoleForm> listerLesRoles() {
