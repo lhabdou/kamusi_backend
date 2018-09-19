@@ -12,7 +12,8 @@ public interface DictionnaireTempRepository extends JpaRepository<LigneDictionna
 	
 	
 	@Query("select d from DictionnaireTempEntite d "
-			+ "left join fetch d.utilisateur u") 
+			+ "left join fetch d.utilisateur u "
+			+ "join fetch d.statut s") 
 	List<DictionnaireTempEntite> listerLesMots(); 
 	
 	

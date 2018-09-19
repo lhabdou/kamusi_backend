@@ -13,7 +13,7 @@ public interface UtilisateurRepository extends JpaRepository<UtilisateurEntite, 
 	
 	@Query("Select u from UtilisateurEntite u "
 			+ "inner join fetch u.role "
-			+ "where lower(u.role.nom_role) = :role")
+			+ "where upper(u.role.nom_role) = :role")
 	List<UtilisateurEntite> listerLesUtilisateursRole(@Param("role")String role);
 	
 

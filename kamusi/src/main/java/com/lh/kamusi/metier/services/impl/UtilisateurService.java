@@ -39,7 +39,7 @@ public class UtilisateurService implements IUtilisateurService {
 	 */
 	@Override
 	public List<UtilisateurForm> listerLesUtilisateurs(String role) {
-		List<UtilisateurEntite> listEntite = utilisateurRepository.listerLesUtilisateursRole(role);
+		List<UtilisateurEntite> listEntite = utilisateurRepository.listerLesUtilisateursRole(role.toUpperCase());
 
 		return utilisateurEntiteToUtilisateurForm.convertList(listEntite);
 	}

@@ -9,17 +9,24 @@ package com.lh.kamusi.metier.services.impl.enumerateur;
  */
 public enum EnumUtils {
 
-	ROLE_ADMIN("Administrateur"), ROLE_VALIDEUR("Valideur"), ROLE_CONTRIBUTEUR("Contributeur"),
-	STATUT_NOUVEAU("Nouveau"), STATUT_AVALIDER("A valider"), STATUT_VALIDE("Validé");
+	ROLE_ADMIN(1,"ADMINISTRATEUR"), ROLE_VALIDEUR(2,"VALIDEUR"), ROLE_CONTRIBUTEUR(3, "CONTRIBUTEUR"), ROLE_INVITE(4, "INVITE"),
+	STATUT_NOUVEAU(1,"NOUVEAU"), STATUT_AVALIDER(2, "A VALIDER"), STATUT_VALIDE(3, "VALIDE");
 
 	private String value;
-
-	EnumUtils(String value) {
+	
+	private Integer id; 
+	
+	EnumUtils(Integer id, String value) {
 
 	}
 
 	public String getValue() {
 		return value;
 	}
+	
+	public Integer getId() {
+		return id;
+	}
+
 
 }

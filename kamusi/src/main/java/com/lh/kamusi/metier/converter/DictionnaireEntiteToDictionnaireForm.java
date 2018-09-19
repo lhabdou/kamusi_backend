@@ -14,6 +14,10 @@ public class DictionnaireEntiteToDictionnaireForm implements Converter<LigneDict
 	@Autowired
 	UtilisateurEntiteToUtilisateurForm utilisateurConvert; 
 	
+	@Autowired
+	StatutEntiteToStatutForm statutEntiteToStatutForm;
+	
+	
 	@Override
 	public LigneDictionnaireForm convert(LigneDictionnaireEntite dictionnaireEntite) {
 		LigneDictionnaireForm dictionnaire = new LigneDictionnaireForm(); 
@@ -28,6 +32,7 @@ public class DictionnaireEntiteToDictionnaireForm implements Converter<LigneDict
 		dictionnaire.setDefinition_com(dictionnaireEntite.getDefinition_com());
 		dictionnaire.setDefinition_fr(dictionnaireEntite.getDefinition_fr());
 		dictionnaire.setUtilisateur(utilisateurConvert.convert(dictionnaireEntite.getUtilisateur()));
+		dictionnaire.setStatut(statutEntiteToStatutForm.convert(dictionnaireEntite.getStatut()));
 		
 		return dictionnaire;
 	}

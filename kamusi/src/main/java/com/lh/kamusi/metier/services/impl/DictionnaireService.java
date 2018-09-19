@@ -1,6 +1,7 @@
 package com.lh.kamusi.metier.services.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.lh.kamusi.metier.converter.DictionnaireEntiteToDictionnaireForm;
 import com.lh.kamusi.metier.converter.DictionnaireFormToDictionnaireEntite;
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
 import com.lh.kamusi.metier.services.IDictionnaireService;
+import com.lh.kamusi.metier.services.impl.enumerateur.EnumUtils;
 
 @Service
 public class DictionnaireService implements IDictionnaireService {
@@ -115,17 +117,21 @@ public class DictionnaireService implements IDictionnaireService {
 		
 		String role = ligneDictionnaireForm.getUtilisateur().getRole().getRole();
 		
+		List<String> listeRoleMajor = Arrays.asList(EnumUtils.ROLE_ADMIN.getValue(), EnumUtils.ROLE_CONTRIBUTEUR.getValue());
 		
-		if("Administrateur".equalsIgnoreCase(role)) {
+		if(listeRoleMajor.contains(role.toUpperCase())) {
 			
-			ligneDictionnaire.getStatut().setStatut("Validé");
+			ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_VALIDE.getValue());
+			ligneDictionnaire.getStatut().setId_statut(EnumUtils.STATUT_VALIDE.getId());
 			ligneDictionnaire.setDateModification(new Date());
 			
 			ligneDictionnaireForm =  dictionnaireEntiteToDictionnaireForm.convert(
 					dictionnaireRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
 		} else {
-				ligneDictionnaire.getStatut().setStatut("A valider");
+				ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_AVALIDER.getValue());
+				ligneDictionnaire.getStatut().setId_statut(EnumUtils.STATUT_AVALIDER.getId());
+				ligneDictionnaire.setDateModification(new Date());
 			ligneDictionnaireForm =  dictionnaireEntiteToDictionnaireForm.convert(
 					dictionnaireTempRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
