@@ -66,8 +66,8 @@ public class DictionnaireTempEntite implements Serializable {
 	/**
 	 * @param mot_ang the mot_ang to set
 	 */
-	public void setMotAng(String mot_ang) {
-		this.motAng = mot_ang;
+	public void setMotAng(String motAng) {
+		this.motAng = motAng;
 	}
 
 	/**
