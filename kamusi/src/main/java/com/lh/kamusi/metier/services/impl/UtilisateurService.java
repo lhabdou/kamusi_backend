@@ -70,4 +70,15 @@ public class UtilisateurService implements IUtilisateurService {
 
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see com.lh.kamusi.metier.services.IUtilisateurService#tousListerLesUtilisateurs()
+	 */
+	@Override
+	public List<UtilisateurForm> tousListerLesUtilisateurs() {
+
+		return utilisateurEntiteToUtilisateurForm.convertList(utilisateurRepository.findAll());
+	}
+
 }

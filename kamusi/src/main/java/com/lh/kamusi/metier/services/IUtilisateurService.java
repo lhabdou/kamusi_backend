@@ -22,7 +22,12 @@ public interface IUtilisateurService {
 	/**
 	 * @param utilisateurForm
 	 */
-	void supprimerUtilisateur(UtilisateurForm utilisateurForm); 
+	void supprimerUtilisateur(UtilisateurForm utilisateurForm);
+
+	/**
+	 * @return List<UtilisateurForm>
+	 */
+	List<UtilisateurForm> tousListerLesUtilisateurs(); 
 	
 	
 

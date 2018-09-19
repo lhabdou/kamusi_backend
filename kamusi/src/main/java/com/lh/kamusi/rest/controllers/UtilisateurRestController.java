@@ -27,11 +27,25 @@ public class UtilisateurRestController {
 	private IUtilisateurService utilisateurService;
 	
 	
+	
 	/**
-	 * Lister les utilisateurs 
+	 * Lister tous les utilisateurs 
+	 * 
+	 * @return ResponseEntity<List<UtilisateurForm>>
+	 */
+	@RequestMapping(value = "/utilisateurs", method = RequestMethod.GET)
+	public ResponseEntity<List<UtilisateurForm>> listerTousLesUtilisateurs() {
+		
+		return new ResponseEntity<>(utilisateurService.tousListerLesUtilisateurs(), HttpStatus.OK); 
+		
+	}
+	
+	
+	/**
+	 * Lister les utilisateurs ayant le role
 	 * 
 	 * @param role
-	 * @return ResponseEntity<List<LigneDictionnaire>>
+	 * @return ResponseEntity<List<UtilisateurForm>>
 	 */
 	@RequestMapping(value = "/utilisateurs/{role}", method = RequestMethod.GET)
 	public ResponseEntity<List<UtilisateurForm>> listerLesUtilisateursRole(@PathVariable("role") String role) {
