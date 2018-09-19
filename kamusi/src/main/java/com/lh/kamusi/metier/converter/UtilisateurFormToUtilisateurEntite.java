@@ -18,12 +18,12 @@ public class UtilisateurFormToUtilisateurEntite implements Converter<Utilisateur
 	public UtilisateurEntite convert(UtilisateurForm utilisateurForm) {
 		UtilisateurEntite utilisateurEntite = new UtilisateurEntite(); 
 		
-		utilisateurEntite.setId_utilisateur(utilisateurForm.getId_utilisateur());
+		utilisateurEntite.setIdUtilisateur(utilisateurForm.getIdUtilisateur());
 		utilisateurEntite.setNom(utilisateurForm.getNom());
 		utilisateurEntite.setPrenom(utilisateurForm.getPrenom());
 		utilisateurEntite.setPseudo(utilisateurForm.getPseudo());
 		utilisateurEntite.setEmail(utilisateurForm.getEmail());
-		utilisateurEntite.setUrl_image(utilisateurForm.getUrl_image());
+		utilisateurEntite.setUrlImage(utilisateurForm.getUrlImage());
 		
 		utilisateurEntite.setRole(roleConvert.convert(utilisateurForm.getRole()));
 		

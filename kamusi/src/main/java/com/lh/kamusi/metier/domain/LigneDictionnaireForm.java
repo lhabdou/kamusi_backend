@@ -17,21 +17,21 @@ public class LigneDictionnaireForm implements Serializable {
 	 */
 	private static final long serialVersionUID = 449981082446983873L;
 
-	private String mot_fr;
+	private String motFr;
 	
-    private String mot_ngz;
+    private String motNgz;
 	
-	private String mot_ang;
+	private String motAng;
 
-    private String mot_ndz;
+    private String motNdz;
 
-    private String mot_mwa;
+    private String motMwa;
 
-    private String mot_mao;
+    private String motMao;
     
-    private String definition_fr; 
+    private String definitionFr; 
     
-    private String definition_com;
+    private String definitionCom;
     
     private String suggestion; 
 
@@ -48,109 +48,109 @@ public class LigneDictionnaireForm implements Serializable {
 	/**
 	 * @return the mot_fr
 	 */
-	public String getMot_fr() {
-		return mot_fr;
+	public String getMotFr() {
+		return motFr;
 	}
 
 	/**
-	 * @param mot_fr the mot_fr to set
+	 * @param motFr the mot_fr to set
 	 */
-	public void setMot_fr(String mot_fr) {
-		this.mot_fr = mot_fr;
+	public void setMotFr(String motFr) {
+		this.motFr = motFr;
 	}
 
 
 
-	public String getMot_ngz() {
-		return mot_ngz;
+	public String getMotNgz() {
+		return motNgz;
 	}
 
-	public void setMot_ngz(String mot_ngz) {
-		this.mot_ngz = mot_ngz;
+	public void setMotNgz(String motNgz) {
+		this.motNgz = motNgz;
 	}
 
 	/**
 	 * @return the mot_ang
 	 */
-	public String getMot_ang() {
-		return mot_ang;
+	public String getMotAng() {
+		return motAng;
 	}
 
 	/**
 	 * @param mot_ang the mot_ang to set
 	 */
-	public void setMot_ang(String mot_ang) {
-		this.mot_ang = mot_ang;
+	public void setMotAng(String motAng) {
+		this.motAng = motAng;
 	}
 
 	/**
-	 * @return the mot_ndz
+	 * @return the motNdz
 	 */
-	public String getMot_ndz() {
-		return mot_ndz;
+	public String getMotNdz() {
+		return motNdz;
 	}
 
 	/**
-	 * @param mot_ndz the mot_ndz to set
+	 * @param motNdz the motNdz to set
 	 */
-	public void setMot_ndz(String mot_ndz) {
-		this.mot_ndz = mot_ndz;
+	public void setMotNdz(String motNdz) {
+		this.motNdz = motNdz;
 	}
 
 	/**
-	 * @return the mot_mwa
+	 * @return the motMwa
 	 */
-	public String getMot_mwa() {
-		return mot_mwa;
+	public String getMotMwa() {
+		return motMwa;
 	}
 
 	/**
-	 * @param mot_mwa the mot_mwa to set
+	 * @param motMwa the motMwa to set
 	 */
-	public void setMot_mwa(String mot_mwa) {
-		this.mot_mwa = mot_mwa;
+	public void setMotMwa(String motMwa) {
+		this.motMwa = motMwa;
 	}
 
 	/**
-	 * @return the mot_mao
+	 * @return the motMao
 	 */
-	public String getMot_mao() {
-		return mot_mao;
+	public String getMotMao() {
+		return motMao;
 	}
 
 	/**
-	 * @param mot_mao the mot_mao to set
+	 * @param motMao the motMao to set
 	 */
-	public void setMot_mao(String mot_mao) {
-		this.mot_mao = mot_mao;
+	public void setMotMao(String motMao) {
+		this.motMao = motMao;
 	}
 
 	/**
-	 * @return the definition_fr
+	 * @return the definitionFr
 	 */
-	public String getDefinition_fr() {
-		return definition_fr;
+	public String getDefinitionFr() {
+		return definitionFr;
 	}
 
 	/**
-	 * @param definition_fr the definition_fr to set
+	 * @param definitionFr the definitionFr to set
 	 */
-	public void setDefinition_fr(String definition_fr) {
-		this.definition_fr = definition_fr;
+	public void setDefinitionFr(String definitionFr) {
+		this.definitionFr = definitionFr;
 	}
 
 	/**
-	 * @return the definition_com
+	 * @return the definitionCom
 	 */
-	public String getDefinition_com() {
-		return definition_com;
+	public String getDefinitionCom() {
+		return definitionCom;
 	}
 
 	/**
-	 * @param definition_com the definition_com to set
+	 * @param definitionCom the definitionCom to set
 	 */
-	public void setDefinition_com(String definition_com) {
-		this.definition_com = definition_com;
+	public void setDefinitionCom(String definitionCom) {
+		this.definitionCom = definitionCom;
 	}
 
 	/**
@@ -236,6 +236,7 @@ public class LigneDictionnaireForm implements Serializable {
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-    
+
+	
 	
 }

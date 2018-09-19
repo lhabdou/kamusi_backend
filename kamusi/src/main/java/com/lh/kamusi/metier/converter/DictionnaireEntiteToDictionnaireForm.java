@@ -22,15 +22,15 @@ public class DictionnaireEntiteToDictionnaireForm implements Converter<LigneDict
 	public LigneDictionnaireForm convert(LigneDictionnaireEntite dictionnaireEntite) {
 		LigneDictionnaireForm dictionnaire = new LigneDictionnaireForm(); 
 		
-		dictionnaire.setMot_fr(dictionnaireEntite.getDictionnairePk().getMot_fr());
-		dictionnaire.setMot_ngz(dictionnaireEntite.getDictionnairePk().getMot_ngz());
-		dictionnaire.setMot_ang(dictionnaireEntite.getMot_ang());
-		dictionnaire.setMot_ndz(dictionnaireEntite.getMot_ndz());
-		dictionnaire.setMot_mao(dictionnaireEntite.getMot_mao());
-		dictionnaire.setMot_mwa(dictionnaireEntite.getMot_mwa());
+		dictionnaire.setMotFr(dictionnaireEntite.getDictionnairePk().getMotFr());
+		dictionnaire.setMotNgz(dictionnaireEntite.getDictionnairePk().getMotNgz());
+		dictionnaire.setMotAng(dictionnaireEntite.getMotAng());
+		dictionnaire.setMotNdz(dictionnaireEntite.getMotNdz());
+		dictionnaire.setMotMao(dictionnaireEntite.getMotMao());
+		dictionnaire.setMotMwa(dictionnaireEntite.getMotMwa());
 		dictionnaire.setSuggestion(dictionnaireEntite.getSuggestion());
-		dictionnaire.setDefinition_com(dictionnaireEntite.getDefinition_com());
-		dictionnaire.setDefinition_fr(dictionnaireEntite.getDefinition_fr());
+		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionCom());
+		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionFr());
 		dictionnaire.setUtilisateur(utilisateurConvert.convert(dictionnaireEntite.getUtilisateur()));
 		dictionnaire.setStatut(statutEntiteToStatutForm.convert(dictionnaireEntite.getStatut()));
 		
@@ -41,15 +41,15 @@ public class DictionnaireEntiteToDictionnaireForm implements Converter<LigneDict
 	public LigneDictionnaireForm convertTemp(DictionnaireTempEntite dictionnaireEntite) {
 		LigneDictionnaireForm dictionnaire = new LigneDictionnaireForm(); 
 		
-		dictionnaire.setMot_fr(dictionnaireEntite.getDictionnairePk().getMot_fr());
-		dictionnaire.setMot_ngz(dictionnaireEntite.getDictionnairePk().getMot_ngz());
-		dictionnaire.setMot_ang(dictionnaireEntite.getMot_ang());
-		dictionnaire.setMot_ndz(dictionnaireEntite.getMot_ndz());
-		dictionnaire.setMot_mao(dictionnaireEntite.getMot_mao());
-		dictionnaire.setMot_mwa(dictionnaireEntite.getMot_mwa());
+		dictionnaire.setMotFr(dictionnaireEntite.getDictionnairePk().getMotFr());
+		dictionnaire.setMotNgz(dictionnaireEntite.getDictionnairePk().getMotNgz());
+		dictionnaire.setMotAng(dictionnaireEntite.getMotAng());
+		dictionnaire.setMotNdz(dictionnaireEntite.getMotNdz());
+		dictionnaire.setMotMao(dictionnaireEntite.getMotMao());
+		dictionnaire.setMotMwa(dictionnaireEntite.getMotMwa());
 		dictionnaire.setSuggestion(dictionnaireEntite.getSuggestion());
-		dictionnaire.setDefinition_com(dictionnaireEntite.getDefinition_com());
-		dictionnaire.setDefinition_fr(dictionnaireEntite.getDefinition_fr());
+		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionCom());
+		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionFr());
 		dictionnaire.setUtilisateur(utilisateurConvert.convert(dictionnaireEntite.getUtilisateur()));
 		
 		return dictionnaire;

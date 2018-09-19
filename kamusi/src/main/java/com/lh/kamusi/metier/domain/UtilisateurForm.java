@@ -17,7 +17,7 @@ public class UtilisateurForm implements Serializable {
 	 */
 	private static final long serialVersionUID = -4084592835867732823L;
 
-	private Long id_utilisateur;
+	private Long idUtilisateur;
 
 	private String nom;
 
@@ -27,22 +27,22 @@ public class UtilisateurForm implements Serializable {
 
 	private String email;
 
-	private String url_image;
+	private String urlImage;
 
 	private RoleForm role;
 
 	/**
 	 * @return the id_utilisateur
 	 */
-	public Long getId_utilisateur() {
-		return id_utilisateur;
+	public Long getIdUtilisateur() {
+		return idUtilisateur;
 	}
 
 	/**
 	 * @param id_utilisateur the id_utilisateur to set
 	 */
-	public void setId_utilisateur(Long id_utilisateur) {
-		this.id_utilisateur = id_utilisateur;
+	public void setIdUtilisateur(Long idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
 	}
 
 	/**
@@ -102,17 +102,17 @@ public class UtilisateurForm implements Serializable {
 	}
 
 	/**
-	 * @return the url_image
+	 * @return the urlImage
 	 */
-	public String getUrl_image() {
-		return url_image;
+	public String getUrlImage() {
+		return urlImage;
 	}
 
 	/**
-	 * @param url_image the url_image to set
+	 * @param urlImage the urlImage to set
 	 */
-	public void setUrl_image(String url_image) {
-		this.url_image = url_image;
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	/**

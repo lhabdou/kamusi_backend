@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.lh.kamusi.dao.entities.pk.Dictionnaire_PK;
+import com.lh.kamusi.dao.entities.pk.DictionnairePk;
 
 
 @Entity
@@ -24,28 +24,28 @@ public class LigneDictionnaireEntite implements Serializable {
 	private static final long serialVersionUID = 7494809426312276556L;
 
 	@EmbeddedId
-	private Dictionnaire_PK dictionnairePk; 
+	private DictionnairePk dictionnairePk; 
 	
 	@Column(name="mot_ang")
-    private String mot_ang;
+    private String motAng;
 
     @Column(name = "mot_ndz")
-    private String mot_ndz;
+    private String motNdz;
 
     @Column(name = "mot_mwa")
-    private String mot_mwa;
+    private String motMwa;
 
     @Column(name = "mot_mao")
-    private String mot_mao;
+    private String motMao;
     
     @Column(name="suggestion")
     private String suggestion; 
     
     @Column(name="definition_fr")
-    private String definition_fr; 
+    private String definitionFr; 
     
     @Column(name="definition_com")
-    private String definition_com; 
+    private String definitionCom; 
     
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur", nullable = false)
@@ -58,57 +58,57 @@ public class LigneDictionnaireEntite implements Serializable {
 	/**
 	 * @return the mot_ang
 	 */
-	public String getMot_ang() {
-		return mot_ang;
+	public String getMotAng() {
+		return motAng;
 	}
 
 	/**
 	 * @param mot_ang the mot_ang to set
 	 */
-	public void setMot_ang(String mot_ang) {
-		this.mot_ang = mot_ang;
+	public void setMotAng(String mot_ang) {
+		this.motAng = mot_ang;
 	}
 
 	/**
 	 * @return the mot_ndz
 	 */
-	public String getMot_ndz() {
-		return mot_ndz;
+	public String getMotNdz() {
+		return motNdz;
 	}
 
 	/**
 	 * @param mot_ndz the mot_ndz to set
 	 */
-	public void setMot_ndz(String mot_ndz) {
-		this.mot_ndz = mot_ndz;
+	public void setMotNdz(String motNdz) {
+		this.motNdz = motNdz;
 	}
 
 	/**
 	 * @return the mot_mwa
 	 */
-	public String getMot_mwa() {
-		return mot_mwa;
+	public String getMotMwa() {
+		return motMwa;
 	}
 
 	/**
 	 * @param mot_mwa the mot_mwa to set
 	 */
-	public void setMot_mwa(String mot_mwa) {
-		this.mot_mwa = mot_mwa;
+	public void setMotMwa(String motMwa) {
+		this.motMwa = motMwa;
 	}
 
 	/**
 	 * @return the mot_mao
 	 */
-	public String getMot_mao() {
-		return mot_mao;
+	public String getMotMao() {
+		return motMao;
 	}
 
 	/**
-	 * @param mot_mao the mot_mao to set
+	 * @param motMao the mot_mao to set
 	 */
-	public void setMot_mao(String mot_mao) {
-		this.mot_mao = mot_mao;
+	public void setMotMao(String motMao) {
+		this.motMao = motMao;
 	}
 
 	/**
@@ -128,14 +128,14 @@ public class LigneDictionnaireEntite implements Serializable {
 	/**
 	 * @return the dictionnairePk
 	 */
-	public Dictionnaire_PK getDictionnairePk() {
+	public DictionnairePk getDictionnairePk() {
 		return dictionnairePk;
 	}
 
 	/**
 	 * @param dictionnairePk the dictionnairePk to set
 	 */
-	public void setDictionnairePk(Dictionnaire_PK dictionnairePk) {
+	public void setDictionnairePk(DictionnairePk dictionnairePk) {
 		this.dictionnairePk = dictionnairePk;
 	}
 
@@ -170,29 +170,29 @@ public class LigneDictionnaireEntite implements Serializable {
 	/**
 	 * @return the definition_fr
 	 */
-	public String getDefinition_fr() {
-		return definition_fr;
+	public String getDefinitionFr() {
+		return definitionFr;
 	}
 
 	/**
 	 * @param definition_fr the definition_fr to set
 	 */
-	public void setDefinition_fr(String definition_fr) {
-		this.definition_fr = definition_fr;
+	public void setDefinitionFr(String definitionFr) {
+		this.definitionFr = definitionFr;
 	}
 
 	/**
 	 * @return the definition_com
 	 */
-	public String getDefinition_com() {
-		return definition_com;
+	public String getDefinitionCom() {
+		return definitionCom;
 	}
 
 	/**
 	 * @param definition_com the definition_com to set
 	 */
-	public void setDefinition_com(String definition_com) {
-		this.definition_com = definition_com;
+	public void setDefinitionCom(String definitionCom) {
+		this.definitionCom = definitionCom;
 	}
 
 	

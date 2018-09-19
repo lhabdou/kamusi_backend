@@ -77,7 +77,7 @@ public class DictionnaireService implements IDictionnaireService {
 
 		if (motComModifie) {
 
-			dictionnaireRepository.delete(dictionnaireRepository.chercherAncienneLigne(ligneDictionnaire.getMot_fr()));
+			dictionnaireRepository.delete(dictionnaireRepository.chercherAncienneLigne(ligneDictionnaire.getMotFr()));
 
 			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(
 					dictionnaireRepository.save(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
@@ -112,30 +112,40 @@ public class DictionnaireService implements IDictionnaireService {
 	 */
 	@Override
 	public LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire) {
-		
+
 		LigneDictionnaireForm ligneDictionnaireForm = new LigneDictionnaireForm();
-		
+
 		String role = ligneDictionnaireForm.getUtilisateur().getRole().getRole();
-		
-		List<String> listeRoleMajor = Arrays.asList(EnumUtils.ROLE_ADMIN.getValue(), EnumUtils.ROLE_CONTRIBUTEUR.getValue());
-		
-		if(listeRoleMajor.contains(role.toUpperCase())) {
-			
+
+		List<String> listeRoleMajor = Arrays.asList(EnumUtils.ROLE_ADMIN.getValue(),
+				EnumUtils.ROLE_CONTRIBUTEUR.getValue());
+
+		if (listeRoleMajor.contains(role.toUpperCase())) {
+
 			ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_VALIDE.getValue());
 			ligneDictionnaire.getStatut().setId_statut(EnumUtils.STATUT_VALIDE.getId());
 			ligneDictionnaire.setDateModification(new Date());
-			
-			ligneDictionnaireForm =  dictionnaireEntiteToDictionnaireForm.convert(
-					dictionnaireRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
+
+			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireRepository
+					.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
 		} else {
-				ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_AVALIDER.getValue());
-				ligneDictionnaire.getStatut().setId_statut(EnumUtils.STATUT_AVALIDER.getId());
-				ligneDictionnaire.setDateModification(new Date());
-			ligneDictionnaireForm =  dictionnaireEntiteToDictionnaireForm.convert(
-					dictionnaireTempRepository.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
-			
+			ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_AVALIDER.getValue());
+			ligneDictionnaire.getStatut().setId_statut(EnumUtils.STATUT_AVALIDER.getId());
+			ligneDictionnaire.setDateModification(new Date());
+
+			LigneDictionnaireEntite ancienneLigne = dictionnaireRepository
+					.chercherAncienneLigne(ligneDictionnaire.getMotFr());
+			ancienneLigne.getStatut().setStatut(EnumUtils.STATUT_AVALIDER.getValue());
+			// ajout dans la table temporaire
+			dictionnaireTempRepository.saveAndFlush(ancienneLigne);
+			// suppression de l'ancienne ligne dans la table principale
+			dictionnaireRepository.delete(ancienneLigne);
+
+			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireTempRepository
+					.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
+
 		}
 
 		return ligneDictionnaireForm;

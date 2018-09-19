@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.lh.kamusi.dao.entities.LigneDictionnaireEntite;
-import com.lh.kamusi.dao.entities.pk.Dictionnaire_PK;
+import com.lh.kamusi.dao.entities.pk.DictionnairePk;
 
-public interface DictionnaireRepository extends JpaRepository<LigneDictionnaireEntite, Dictionnaire_PK> {
+public interface DictionnaireRepository extends JpaRepository<LigneDictionnaireEntite, DictionnairePk> {
 	
 	
 	@Query("select d from LigneDictionnaireEntite d "
