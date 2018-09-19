@@ -39,7 +39,6 @@ public class LigneDictionnaireForm implements Serializable {
 
     private StatutForm statut;
     
-    private boolean motComModifie; 
     
     private Date dateModification;
     
@@ -193,20 +192,6 @@ public class LigneDictionnaireForm implements Serializable {
 	 */
 	public void setStatut(StatutForm statut) {
 		this.statut = statut;
-	}
-
-	/**
-	 * @return the motComModifie
-	 */
-	public boolean isMotComModifie() {
-		return motComModifie;
-	}
-
-	/**
-	 * @param motComModifie the motComModifie to set
-	 */
-	public void setMotComModifie(boolean motComModifie) {
-		this.motComModifie = motComModifie;
 	}
 
 	/**

@@ -123,7 +123,7 @@ public class DictionnaireService implements IDictionnaireService {
 		if (listeRoleMajor.contains(role.toUpperCase())) {
 
 			ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_VALIDE.getValue());
-			ligneDictionnaire.getStatut().setId_statut(EnumUtils.STATUT_VALIDE.getId());
+			ligneDictionnaire.getStatut().setIdStatut(EnumUtils.STATUT_VALIDE.getId());
 			ligneDictionnaire.setDateModification(new Date());
 
 			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireRepository
@@ -132,7 +132,7 @@ public class DictionnaireService implements IDictionnaireService {
 		} else {
 
 			ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_AVALIDER.getValue());
-			ligneDictionnaire.getStatut().setId_statut(EnumUtils.STATUT_AVALIDER.getId());
+			ligneDictionnaire.getStatut().setIdStatut(EnumUtils.STATUT_AVALIDER.getId());
 			ligneDictionnaire.setDateModification(new Date());
 
 			LigneDictionnaireEntite ancienneLigne = dictionnaireRepository

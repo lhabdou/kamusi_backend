@@ -13,7 +13,7 @@ public class StatutEntiteToStatutForm implements Converter<StatutEntite, StatutF
 	public StatutForm convert(StatutEntite StatutEntite) {
 		StatutForm StatutForm = new StatutForm(); 
 		
-		StatutForm.setId_statut(StatutEntite.getId_statut());
+		StatutForm.setIdStatut(StatutEntite.getId_statut());
 		StatutForm.setStatut(StatutEntite.getStatut());
 		
 		return StatutForm;

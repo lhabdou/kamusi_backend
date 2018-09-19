@@ -16,22 +16,22 @@ public class StatutForm implements Serializable {
 	 */
 	private static final long serialVersionUID = -4242992104693138160L;
 
-	private Integer id_statut; 
+	private Integer idStatut; 
 	
 	private String statut;
 
 	/**
-	 * @return the id_statut
+	 * @return the idStatut
 	 */
-	public Integer getId_statut() {
-		return id_statut;
+	public Integer getIdStatut() {
+		return idStatut;
 	}
 
 	/**
-	 * @param id_statut the id_statut to set
+	 * @param idStatut the idStatut to set
 	 */
-	public void setId_statut(Integer id_statut) {
-		this.id_statut = id_statut;
+	public void setIdStatut(Integer idStatut) {
+		this.idStatut = idStatut;
 	}
 
 	/**
