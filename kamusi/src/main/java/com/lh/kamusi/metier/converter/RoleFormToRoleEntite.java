@@ -12,9 +12,10 @@ public class RoleFormToRoleEntite implements Converter<RoleForm, RoleEntite> {
 	@Override
 	public RoleEntite convert(RoleForm roleForm) {
 		RoleEntite roleEntite = new RoleEntite(); 
-		
-		roleEntite.setId(roleForm.getId());
-		roleEntite.setNom_role(roleForm.getRole());
+		if(roleForm != null) {
+			roleEntite.setId(roleForm.getId());
+			roleEntite.setNom_role(roleForm.getRole());
+		}
 		
 		return roleEntite;
 	}

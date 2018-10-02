@@ -54,8 +54,8 @@ public class DictionnaireRestController {
 	 * @param ligneDictionnaireForm
 	 * @return ResponseEntity<LigneDictionnaireForm>
 	 */
-	@RequestMapping(value = "/suggerermodification", method = RequestMethod.PUT)
-	public ResponseEntity<LigneDictionnaireForm> suggererModification (
+	@RequestMapping(value = "/proposermodification", method = RequestMethod.PUT)
+	public ResponseEntity<LigneDictionnaireForm> proposerModification (
 			@RequestBody LigneDictionnaireForm ligneDictionnaireForm) {
 
 		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm),

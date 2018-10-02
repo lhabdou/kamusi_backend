@@ -118,7 +118,7 @@ public class DictionnaireService implements IDictionnaireService {
 		String role = ligneDictionnaireForm.getUtilisateur().getRole().getRole();
 
 		List<String> listeRoleMajor = Arrays.asList(EnumUtils.ROLE_ADMIN.getValue(),
-				EnumUtils.ROLE_CONTRIBUTEUR.getValue());
+				EnumUtils.ROLE_VALIDEUR.getValue());
 
 		if (listeRoleMajor.contains(role.toUpperCase())) {
 
