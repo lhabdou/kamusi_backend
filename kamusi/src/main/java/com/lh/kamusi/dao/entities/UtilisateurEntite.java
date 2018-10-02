@@ -44,7 +44,7 @@ public class UtilisateurEntite implements Serializable {
 	@Column(name = "url_image")
 	private String urlImage;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_role")
 	private RoleEntite role;
 

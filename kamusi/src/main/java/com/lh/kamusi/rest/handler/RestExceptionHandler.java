@@ -1,4 +1,4 @@
-package com.lh.kamusi.rest.controllers;
+package com.lh.kamusi.rest.handler;
 
 import java.nio.file.AccessDeniedException;
 
