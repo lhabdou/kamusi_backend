@@ -9,40 +9,46 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.lh.kamusi.metier.domain.UtilisateurForm;
 import com.lh.kamusi.metier.services.IUtilisateurService;
+import com.lh.kamusi.rest.firebase.FirebaseVerification;
 
 @RestController
 @CrossOrigin("http://localhost:8100")
-@RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UtilisateurRestController {
-	
-	
+
 	/**
-	 * le service 
+	 * le service
 	 */
 	@Autowired
 	private IUtilisateurService utilisateurService;
 	
-	
-	
 	/**
-	 * Lister tous les utilisateurs 
+	 * le service firebase
+	 */
+	@Autowired
+	private FirebaseVerification firebaseVerification;
+
+	/**
+	 * Lister tous les utilisateurs
 	 * 
 	 * @return ResponseEntity<List<UtilisateurForm>>
 	 */
 	@RequestMapping(value = "/utilisateurs", method = RequestMethod.GET)
 	public ResponseEntity<List<UtilisateurForm>> listerTousLesUtilisateurs() {
-		
-		return new ResponseEntity<>(utilisateurService.tousListerLesUtilisateurs(), HttpStatus.OK); 
-		
+
+		return new ResponseEntity<>(utilisateurService.tousListerLesUtilisateurs(), HttpStatus.OK);
+
 	}
-	
-	
+
 	/**
 	 * Lister les utilisateurs ayant le role
 	 * 
@@ -51,24 +57,27 @@ public class UtilisateurRestController {
 	 */
 	@RequestMapping(value = "/utilisateurs/{role}", method = RequestMethod.GET)
 	public ResponseEntity<List<UtilisateurForm>> listerLesUtilisateursRole(@PathVariable("role") String role) {
-		
-		return new ResponseEntity<>(utilisateurService.listerLesUtilisateurs(role), HttpStatus.OK); 
-		
+
+		return new ResponseEntity<>(utilisateurService.listerLesUtilisateurs(role), HttpStatus.OK);
+
 	}
-	
+
 	/**
-	 * Ajouter un Utilisateur 
+	 * Ajouter un Utilisateur
 	 * 
 	 * @param utilisateurForm
 	 * @return ResponseEntity<UtilisateurForm>
+	 * @throws FirebaseAuthException 
 	 */
 	@RequestMapping(value = "/utilisateurs/nouveau", method = RequestMethod.POST)
-	public ResponseEntity<UtilisateurForm> ajouterUnUtilisateur(@RequestBody UtilisateurForm utilisateurForm) {
-		
-		return new ResponseEntity<>(utilisateurService.ajouterUtilisateur(utilisateurForm), HttpStatus.OK); 
-		
+	public ResponseEntity<UtilisateurForm> ajouterUnUtilisateur(@RequestHeader(value = "uid") String idToken,
+			@RequestBody UtilisateurForm utilisateurForm) throws FirebaseAuthException {
+		firebaseVerification.getUserIdFromIdToken(idToken);	
+
+		return new ResponseEntity<>(utilisateurService.ajouterUtilisateur(utilisateurForm), HttpStatus.OK);
+
 	}
-	
+
 	/**
 	 * Supprimer un utilisateur
 	 * 
@@ -77,10 +86,9 @@ public class UtilisateurRestController {
 	 */
 	@RequestMapping(value = "/utilisateurs/supprimer", method = RequestMethod.DELETE)
 	public void supprimerUnUtilisateur(@RequestBody UtilisateurForm utilisateurForm) {
-		
-		 utilisateurService.supprimerUtilisateur(utilisateurForm);
-		 
-	}
 
+		utilisateurService.supprimerUtilisateur(utilisateurForm);
+
+	}
 
 }

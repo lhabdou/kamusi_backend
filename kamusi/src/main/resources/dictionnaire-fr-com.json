@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "dictionnaire-fr-com",
+  "private_key_id": "90b3eb67d5114db3f38c2f3f73e6f260d27f7997",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDSJ/EJ2ypm0FY4\nT9inTAj15yxSdeHjl86pByO0rRN/wOPBr9YUR7WW2EEA7oZBQR1sFljDz38kZUF/\nWwBp0j+/N5JxpWvKFvaom6Q1fi3oHLoIxCcLcWrWD+09Un1GNhEwrAU91hp2FEaO\nlkM93dRlj7eBFlwvMoq74vu4tACIunLwb1aJz/fcP+S1kuHQxRI/JAqbQnQu18Ig\nEzgkc9HbuZWXlEuS7l6pmKq3H/V9XEhoYOsRhGy0p+zshqumTypRTFX8ntwCGHb8\nAKff+0/3gtKYNyZEcohwir7ZhiCcjEpLrHHbqH04mxIQMWmz7f/cGQVJarJt4/2y\n5uhjhxH5AgMBAAECggEACos1d3t7jw2y+SQn1efKDChWiW+7E6p9yzdZIFREqoj9\nKOUPVjj/q9a2KVcFIchIV2cmMM6FEm0t0iTdeBZGJKLtD6WdGOh6LcGR4ORUHboR\nhoDs4pDgGR4JlreJIsa68w9oqVejQBal501YP08nYKldmTYLxK/di+T1/EzYy3D4\nnCbBs/e4UUole+FaSJVeVHiNjYdn9eo9JGgwkRQxbGWJqMmQ4CUTCJaZeMeXmZSk\nHLc6gheH444hqWtSAv+G9kC5BVVyi4iKqfspZapgTJmPvMrgLEe4sjebJ5MZ9VnY\n8aNGkm95Hu9pK6E5XmCaCo660jiigj1gw1UJ+eW5VwKBgQDqw684UbJPhXqUtY6v\nmS01/eSsxek5HVRZbxk7n4aMZdx4S2kWgA4O7ew7XjyqQf6nNqb/HOXrRgyX2Tp0\nxOLKjlH11X4NYzVYfbW/rU4OopNxGgry1VRIDBGc7EzRVt5BpBpkbhsD9J98q+4g\noi7Q5mgTgCyIxiy/4kEq2azWjwKBgQDlKmn8Z/no+IWZNLudbQkwMR4ykPRHUSmo\nS3sCSZ5NPThXjzg66zqDBdPnY+IL4bHF0KDlOrRLxUhQaT907LQ72m0tTVjt6NyH\nxtddhRs0E1+dDzY4KPuNIvow2DAkZhmnauta4SDMH7W/oa8F8WZCmzSh9sxbRWQW\n+zY4JXIS9wKBgFveQ704SxzPUQ7MlY+l04ljV488y21sSsvMrAUnAhIC8mmoqPED\nH308IcuBrx+5P5vTyTnf5yFQgjER8swrF8zIMM6QwwkeH4wHdY4SlY8ok6YY2Nv6\nG0cuYd4UomLxKXxqaWGPrMa5fYfeCAuBK+zXnTa0W7kSRAS612GbWQWFAoGAXDgu\nQHGDIxpngNi0q0xGh0ss0MJ+WvixX9VIIgqIFqMNOkcbJLKmcDV3KcWLIKbpSCaF\nqNlv1pIEYL+J1r6uZOuoRbO7lrm/jTAaWLsI0HL/Zg/KDN2JJSmvLtrAvNUNe87N\n+VthPGOCWyRwb17OfP1CN+8+G3iYJ5teHUgMWM8CgYEAj0ld3CDhRI5gRyiAjb8Y\nzMFRvwBhA0vBvWGCjW6jUa/j5fW1WGL3qEEjJPLDswbfUSlXDcYWFuI3kwFSqoQK\nByxZn/2vz45X0agnPeHdLUFWmlbM/wF8Kj+41Nbfm6LNLhxkYv1x1PrXgfyIOAKa\nuNwgO/ZIlkysFpYlpveXXCw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-aajqr@dictionnaire-fr-com.iam.gserviceaccount.com",
+  "client_id": "115858363491572904812",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-aajqr%40dictionnaire-fr-com.iam.gserviceaccount.com"
+}
