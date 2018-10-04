@@ -6,13 +6,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "Utilisateur")
@@ -24,10 +21,8 @@ public class UtilisateurEntite implements Serializable {
 	private static final long serialVersionUID = -7966650235494300375L;
 
 	@Id
-	@GenericGenerator(name="increment", strategy="increment")
-	@GeneratedValue(generator="increment")
-	@Column(name="id_utilisateur")
-	private Long idUtilisateur;
+	@Column(name="id_utilisateur", nullable=false)
+	private String idUtilisateur;
 
 	@Column(name = "nom")
 	private String nom;
@@ -51,14 +46,14 @@ public class UtilisateurEntite implements Serializable {
 	/**
 	 * @return the id_utilisateur
 	 */
-	public Long getIdUtilisateur() {
+	public String getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
 	/**
 	 * @param id_utilisateur the id_utilisateur to set
 	 */
-	public void setIdUtilisateur(Long idUtilisateur) {
+	public void setIdUtilisateur(String idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
 

@@ -27,7 +27,13 @@ public interface IUtilisateurService {
 	/**
 	 * @return List<UtilisateurForm>
 	 */
-	List<UtilisateurForm> tousListerLesUtilisateurs(); 
+	List<UtilisateurForm> tousListerLesUtilisateurs();
+
+	/**
+	 * @param uid
+	 * @return UtilisateurForm
+	 */
+	UtilisateurForm getProfileUtilisateur(String uid); 
 	
 	
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.lh.kamusi.metier.domain.UtilisateurForm;
 import com.lh.kamusi.metier.services.IUtilisateurService;
@@ -30,7 +29,7 @@ public class UtilisateurRestController {
 	 */
 	@Autowired
 	private IUtilisateurService utilisateurService;
-	
+
 	/**
 	 * le service firebase
 	 */
@@ -67,12 +66,13 @@ public class UtilisateurRestController {
 	 * 
 	 * @param utilisateurForm
 	 * @return ResponseEntity<UtilisateurForm>
-	 * @throws FirebaseAuthException 
+	 * @throws FirebaseAuthException
 	 */
 	@RequestMapping(value = "/utilisateurs/nouveau", method = RequestMethod.POST)
-	public ResponseEntity<UtilisateurForm> ajouterUnUtilisateur(@RequestHeader(value = "uid") String idToken,
+	public ResponseEntity<UtilisateurForm> ajouterUnUtilisateur(@RequestHeader(value = "token") String idToken,
 			@RequestBody UtilisateurForm utilisateurForm) throws FirebaseAuthException {
-		firebaseVerification.getUserIdFromIdToken(idToken);	
+
+		utilisateurForm.setIdUtilisateur(firebaseVerification.getUserIdFromIdToken(idToken));
 
 		return new ResponseEntity<>(utilisateurService.ajouterUtilisateur(utilisateurForm), HttpStatus.OK);
 
@@ -88,6 +88,21 @@ public class UtilisateurRestController {
 	public void supprimerUnUtilisateur(@RequestBody UtilisateurForm utilisateurForm) {
 
 		utilisateurService.supprimerUtilisateur(utilisateurForm);
+
+	}
+
+	/**
+	 * Supprimer un utilisateur
+	 * 
+	 * @param utilisateurForm
+	 * @return ResponseEntity<UtilisateurForm>
+	 * @throws FirebaseAuthException
+	 */
+	@RequestMapping(value = "/utilisateurs/profil", method = RequestMethod.GET)
+	public void getProfileUtilisateur(@RequestHeader(value = "token") String token,
+			@RequestBody UtilisateurForm utilisateurForm) throws FirebaseAuthException {
+
+		utilisateurService.getProfileUtilisateur(firebaseVerification.getUserIdFromIdToken(token));
 
 	}
 

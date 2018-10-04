@@ -17,7 +17,7 @@ public class UtilisateurForm implements Serializable {
 	 */
 	private static final long serialVersionUID = -4084592835867732823L;
 
-	private Long idUtilisateur;
+	private String idUtilisateur;
 
 	private String nom;
 
@@ -34,15 +34,15 @@ public class UtilisateurForm implements Serializable {
 	/**
 	 * @return the id_utilisateur
 	 */
-	public Long getIdUtilisateur() {
+	public String getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
 	/**
 	 * @param id_utilisateur the id_utilisateur to set
 	 */
-	public void setIdUtilisateur(Long idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setIdUtilisateur(String string) {
+		this.idUtilisateur = string;
 	}
 
 	/**

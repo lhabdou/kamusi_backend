@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.lh.kamusi.dao.entities.UtilisateurEntite;
 
-public interface UtilisateurRepository extends JpaRepository<UtilisateurEntite, Long> {
+public interface UtilisateurRepository extends JpaRepository<UtilisateurEntite, String> {
 	
 	
 	@Query("Select u from UtilisateurEntite u "

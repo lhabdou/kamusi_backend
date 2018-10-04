@@ -82,4 +82,14 @@ public class UtilisateurService implements IUtilisateurService {
 		return utilisateurEntiteToUtilisateurForm.convertList(utilisateurRepository.findAll());
 	}
 
+	/**
+	 *  (non-Javadoc)
+	 * @see com.lh.kamusi.metier.services.IUtilisateurService#getProfileUtilisateur(java.lang.String)
+	 */
+	@Override
+	public UtilisateurForm getProfileUtilisateur(String uid) {
+
+		return utilisateurEntiteToUtilisateurForm.convert(utilisateurRepository.getOne(uid));
+	}
+
 }
