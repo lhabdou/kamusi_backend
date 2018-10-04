@@ -20,9 +20,9 @@ public interface IUtilisateurService {
 	UtilisateurForm ajouterUtilisateur(UtilisateurForm utilisateurForm); 
 	
 	/**
-	 * @param utilisateurForm
+	 * @param uid
 	 */
-	void supprimerUtilisateur(UtilisateurForm utilisateurForm);
+	void supprimerUtilisateur(String uid);
 
 	/**
 	 * @return List<UtilisateurForm>

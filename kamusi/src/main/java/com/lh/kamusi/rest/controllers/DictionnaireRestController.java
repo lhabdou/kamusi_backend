@@ -18,7 +18,7 @@ import com.lh.kamusi.metier.services.IDictionnaireService;
 
 @RestController
 @CrossOrigin("http://localhost:8100")
-@RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class DictionnaireRestController {
 
 	/**

@@ -52,7 +52,6 @@ public class UtilisateurService implements IUtilisateurService {
 	 */
 	@Override
 	public UtilisateurForm ajouterUtilisateur(UtilisateurForm utilisateurForm) {
-		
 
 		return utilisateurEntiteToUtilisateurForm
 				.convert(utilisateurRepository.save(utilisateurFormToUtilisateurEntite.convert(utilisateurForm)));
@@ -65,9 +64,9 @@ public class UtilisateurService implements IUtilisateurService {
 	 *      supprimerUtilisateur(com.lh.kamusi.metier.domain.UtilisateurForm)
 	 */
 	@Override
-	public void supprimerUtilisateur(UtilisateurForm utilisateurForm) {
+	public void supprimerUtilisateur(String uid) {
 
-		utilisateurRepository.delete(utilisateurFormToUtilisateurEntite.convert(utilisateurForm));
+		utilisateurRepository.deleteById(uid);
 
 	}
 
@@ -83,7 +82,8 @@ public class UtilisateurService implements IUtilisateurService {
 	}
 
 	/**
-	 *  (non-Javadoc)
+	 * (non-Javadoc)
+	 * 
 	 * @see com.lh.kamusi.metier.services.IUtilisateurService#getProfileUtilisateur(java.lang.String)
 	 */
 	@Override
