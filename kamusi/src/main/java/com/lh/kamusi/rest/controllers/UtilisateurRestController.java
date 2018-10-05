@@ -75,7 +75,7 @@ public class UtilisateurRestController {
 
 		utilisateurForm.setIdUtilisateur(firebaseVerification.getUserIdFromIdToken(idToken));
 
-		return new ResponseEntity<>(utilisateurService.ajouterUtilisateur(utilisateurForm), HttpStatus.OK);
+		return new ResponseEntity<>(utilisateurService.enregistrerUtilisateur(utilisateurForm), HttpStatus.OK);
 
 	}
 
@@ -96,7 +96,7 @@ public class UtilisateurRestController {
 	}
 
 	/**
-	 * Supprimer un utilisateur
+	 * récupérer un utilisateur
 	 * 
 	 * @param utilisateurForm
 	 * @return ResponseEntity<UtilisateurForm>
@@ -108,6 +108,23 @@ public class UtilisateurRestController {
 		return new ResponseEntity<>(
 				utilisateurService.getProfileUtilisateur(firebaseVerification.getUserIdFromIdToken(token)),
 				HttpStatus.OK);
+
+	}
+	
+	/**
+	 * Mettre à jour un Utilisateur
+	 * 
+	 * @param utilisateurForm
+	 * @return ResponseEntity<UtilisateurForm>
+	 * @throws FirebaseAuthException
+	 */
+	@RequestMapping(value = "/utilisateurs/modifier", method = RequestMethod.PUT)
+	public ResponseEntity<UtilisateurForm> modifierUnUtilisateur(@RequestHeader(value = "token") String idToken,
+			@RequestBody UtilisateurForm utilisateurForm) throws FirebaseAuthException {
+
+		utilisateurForm.setIdUtilisateur(firebaseVerification.getUserIdFromIdToken(idToken));
+
+		return new ResponseEntity<>(utilisateurService.enregistrerUtilisateur(utilisateurForm), HttpStatus.OK);
 
 	}
 

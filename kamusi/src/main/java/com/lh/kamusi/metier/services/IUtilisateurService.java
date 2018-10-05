@@ -17,7 +17,7 @@ public interface IUtilisateurService {
 	 * @param utilisateurForm
 	 * @return UtilisateurForm
 	 */
-	UtilisateurForm ajouterUtilisateur(UtilisateurForm utilisateurForm); 
+	UtilisateurForm enregistrerUtilisateur(UtilisateurForm utilisateurForm); 
 	
 	/**
 	 * @param uid
@@ -33,7 +33,8 @@ public interface IUtilisateurService {
 	 * @param uid
 	 * @return UtilisateurForm
 	 */
-	UtilisateurForm getProfileUtilisateur(String uid); 
+	UtilisateurForm getProfileUtilisateur(String uid);
+
 	
 	
 

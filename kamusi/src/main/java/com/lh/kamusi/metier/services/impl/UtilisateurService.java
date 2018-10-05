@@ -48,10 +48,10 @@ public class UtilisateurService implements IUtilisateurService {
 	 * (non-Javadoc)
 	 * 
 	 * @see com.lh.kamusi.metier.services.IUtilisateurService#
-	 *      ajouterUtilisateur(com.lh.kamusi.metier.domain.UtilisateurForm)
+	 *      enregistrerUtilisateur(com.lh.kamusi.metier.domain.UtilisateurForm)
 	 */
 	@Override
-	public UtilisateurForm ajouterUtilisateur(UtilisateurForm utilisateurForm) {
+	public UtilisateurForm enregistrerUtilisateur(UtilisateurForm utilisateurForm) {
 
 		return utilisateurEntiteToUtilisateurForm
 				.convert(utilisateurRepository.save(utilisateurFormToUtilisateurEntite.convert(utilisateurForm)));
