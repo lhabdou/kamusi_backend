@@ -46,7 +46,6 @@ public class UtilisateurService implements IUtilisateurService {
 
 	/**
 	 * (non-Javadoc)
-	 * 
 	 * @see com.lh.kamusi.metier.services.IUtilisateurService#
 	 *      enregistrerUtilisateur(com.lh.kamusi.metier.domain.UtilisateurForm)
 	 */
