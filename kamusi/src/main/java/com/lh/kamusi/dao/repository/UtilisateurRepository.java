@@ -18,8 +18,7 @@ public interface UtilisateurRepository extends JpaRepository<UtilisateurEntite, 
 
 	@Query("Select u from UtilisateurEntite u "
 			+ "inner join fetch u.role "
-			+ "where upper(u.role.nom_role) = 'ADMINISTRATEUR' "
-			+ "AND ROWNUM <= 1") 
+			+ "where upper(u.role.nom_role) = 'ADMINISTRATEUR'") 
 	UtilisateurEntite getAdminUser();
 	
 

@@ -71,7 +71,7 @@ public class UtilisateurService implements IUtilisateurService {
 	public void supprimerUtilisateur(String uid) {
 		List<LigneDictionnaireEntite> motsUser = dictionnaireRepository.listerLesMotsParUserId(uid);
 		
-		if( motsUser!= null) {
+		if( motsUser!= null && !motsUser.isEmpty()) {
 			
 			UtilisateurEntite admin = utilisateurRepository.getAdminUser();
 			
