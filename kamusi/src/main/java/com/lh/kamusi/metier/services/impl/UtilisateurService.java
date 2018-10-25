@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lh.kamusi.dao.entities.LigneDictionnaireEntite;
 import com.lh.kamusi.dao.entities.UtilisateurEntite;
+import com.lh.kamusi.dao.repository.DictionnaireRepository;
 import com.lh.kamusi.dao.repository.UtilisateurRepository;
 import com.lh.kamusi.metier.converter.UtilisateurEntiteToUtilisateurForm;
 import com.lh.kamusi.metier.converter.UtilisateurFormToUtilisateurEntite;
@@ -24,6 +26,8 @@ public class UtilisateurService implements IUtilisateurService {
 
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
+	@Autowired
+	private DictionnaireRepository dictionnaireRepository;
 
 	@Autowired
 	private UtilisateurEntiteToUtilisateurForm utilisateurEntiteToUtilisateurForm;
@@ -46,6 +50,7 @@ public class UtilisateurService implements IUtilisateurService {
 
 	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see com.lh.kamusi.metier.services.IUtilisateurService#
 	 *      enregistrerUtilisateur(com.lh.kamusi.metier.domain.UtilisateurForm)
 	 */
@@ -64,8 +69,23 @@ public class UtilisateurService implements IUtilisateurService {
 	 */
 	@Override
 	public void supprimerUtilisateur(String uid) {
-
-		utilisateurRepository.deleteById(uid);
+		List<LigneDictionnaireEntite> motsUser = dictionnaireRepository.listerLesMotsParUserId(uid);
+		
+		if( motsUser!= null) {
+			
+			UtilisateurEntite admin = utilisateurRepository.getAdminUser();
+			
+			for (LigneDictionnaireEntite ligneDictionnaireEntite : motsUser) {
+				
+				ligneDictionnaireEntite.setUtilisateur(admin);
+				
+			}
+			
+			dictionnaireRepository.saveAll(motsUser);			
+		} 
+		
+			utilisateurRepository.deleteById(uid);
+		
 
 	}
 
