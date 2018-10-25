@@ -13,6 +13,18 @@ public class RoleForm implements Serializable {
 	
 	private String role;
 
+	public RoleForm() {
+
+	}
+	
+	
+	public RoleForm(Integer id, String role) {
+		super();
+		this.id = id;
+		this.role = role;
+	}
+
+
 	/**
 	 * @return the id
 	 */
