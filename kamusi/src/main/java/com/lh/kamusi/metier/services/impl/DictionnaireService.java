@@ -16,7 +16,7 @@ import com.lh.kamusi.metier.converter.DictionnaireEntiteToDictionnaireForm;
 import com.lh.kamusi.metier.converter.DictionnaireFormToDictionnaireEntite;
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
 import com.lh.kamusi.metier.services.IDictionnaireService;
-import com.lh.kamusi.metier.services.impl.enumerateur.EnumUtils;
+import com.lh.kamusi.metier.services.impl.enumerateur.RolesStatuts;
 
 @Service
 public class DictionnaireService implements IDictionnaireService {
@@ -117,13 +117,13 @@ public class DictionnaireService implements IDictionnaireService {
 
 		String role = ligneDictionnaireForm.getUtilisateur().getRole().getRole();
 
-		List<String> listeRoleMajor = Arrays.asList(EnumUtils.ROLE_ADMIN.getValue(),
-				EnumUtils.ROLE_VALIDEUR.getValue());
+		List<String> listeRoleMajor = Arrays.asList(RolesStatuts.ROLE_ADMIN.getValue(),
+				RolesStatuts.ROLE_VALIDEUR.getValue());
 
 		if (listeRoleMajor.contains(role.toUpperCase())) {
 
-			ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_VALIDE.getValue());
-			ligneDictionnaire.getStatut().setIdStatut(EnumUtils.STATUT_VALIDE.getId());
+			ligneDictionnaire.getStatut().setStatut(RolesStatuts.STATUT_VALIDE.getValue());
+			ligneDictionnaire.getStatut().setIdStatut(RolesStatuts.STATUT_VALIDE.getId());
 			ligneDictionnaire.setDateModification(new Date());
 
 			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireRepository
@@ -131,13 +131,13 @@ public class DictionnaireService implements IDictionnaireService {
 
 		} else {
 
-			ligneDictionnaire.getStatut().setStatut(EnumUtils.STATUT_AVALIDER.getValue());
-			ligneDictionnaire.getStatut().setIdStatut(EnumUtils.STATUT_AVALIDER.getId());
+			ligneDictionnaire.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
+			ligneDictionnaire.getStatut().setIdStatut(RolesStatuts.STATUT_AVALIDER.getId());
 			ligneDictionnaire.setDateModification(new Date());
 
 			LigneDictionnaireEntite ancienneLigne = dictionnaireRepository
 					.chercherAncienneLigne(ligneDictionnaire.getMotFr());
-			ancienneLigne.getStatut().setStatut(EnumUtils.STATUT_AVALIDER.getValue());
+			ancienneLigne.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
 			// ajout dans la table temporaire
 			dictionnaireTempRepository.saveAndFlush(ancienneLigne);
 			// suppression de l'ancienne ligne dans la table principale

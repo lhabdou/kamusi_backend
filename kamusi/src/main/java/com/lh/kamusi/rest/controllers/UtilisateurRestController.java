@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.UserRecord;
-import com.lh.kamusi.metier.domain.RoleForm;
+import com.lh.kamusi.metier.converter.UserRecordConvertToUserForm;
 import com.lh.kamusi.metier.domain.UtilisateurForm;
 import com.lh.kamusi.metier.services.IUtilisateurService;
-import com.lh.kamusi.metier.services.impl.enumerateur.EnumUtils;
 import com.lh.kamusi.rest.firebase.FirebaseVerification;
 
 /**
@@ -47,6 +45,14 @@ public class UtilisateurRestController {
 	 */
 	@Autowired
 	private FirebaseVerification firebaseVerification;
+	
+	
+	/**
+	 * component pour convertir un user google à un user interne
+	 */
+	@Autowired
+	private UserRecordConvertToUserForm userRecorConvertToUserForm;
+	
 
 	/**
 	 * Lister tous les utilisateurs
@@ -130,11 +136,13 @@ public class UtilisateurRestController {
 	public ResponseEntity<UtilisateurForm> getProfileUtilisateur(@RequestHeader(value = "token") String token)
 			throws FirebaseAuthException {
 		String uid = firebaseVerification.getUserIdFromIdToken(token);
+		
 		UtilisateurForm userForm = utilisateurService.getProfileUtilisateur(uid);
 
 		if (userForm == null) {
 
-			userForm = convertUserRecordToUserProfilAndSaveIt(firebaseVerification.getUserIdFromUid(uid));
+			userForm = userRecorConvertToUserForm.convert(firebaseVerification.getUserIdFromUid(uid));
+			utilisateurService.enregistrerUtilisateur(userForm);
 		}
 
 		return new ResponseEntity<>(
@@ -166,29 +174,10 @@ public class UtilisateurRestController {
 	 */
 	private ResponseEntity<UtilisateurForm> enregistrerOuModifierUtilisateur(String idToken,
 			UtilisateurForm utilisateurForm) throws FirebaseAuthException {
+		
 		utilisateurForm.setIdUtilisateur(firebaseVerification.getUserIdFromIdToken(idToken));
 
 		return new ResponseEntity<>(utilisateurService.enregistrerUtilisateur(utilisateurForm), HttpStatus.OK);
-	}
-
-	/**
-	 * @param userIdFromUid
-	 * @return UtilisateurForm
-	 */
-	private UtilisateurForm convertUserRecordToUserProfilAndSaveIt(UserRecord userIdFromUid) {
-
-		UtilisateurForm userForm = new UtilisateurForm();
-
-		userForm.setEmail(userIdFromUid.getEmail());
-		userForm.setIdUtilisateur(userIdFromUid.getUid());
-		userForm.setNom(userIdFromUid.getDisplayName());
-		userForm.setRole(new RoleForm(EnumUtils.ROLE_CONTRIBUTEUR.getId(), EnumUtils.ROLE_CONTRIBUTEUR.getValue()));
-		userForm.setUrlImage(userIdFromUid.getPhotoUrl());
-		
-		utilisateurService.enregistrerUtilisateur(userForm);
-
-		return userForm;
-
 	}
 
 }

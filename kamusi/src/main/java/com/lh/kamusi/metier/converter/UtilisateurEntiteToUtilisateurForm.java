@@ -10,29 +10,36 @@ import org.springframework.stereotype.Component;
 import com.lh.kamusi.dao.entities.UtilisateurEntite;
 import com.lh.kamusi.metier.domain.UtilisateurForm;
 
-
 @Component
 public class UtilisateurEntiteToUtilisateurForm implements Converter<UtilisateurEntite, UtilisateurForm> {
-	
+
 	@Autowired
 	RoleEntiteToRoleForm roleConvert;
-	
-	/** (non-Javadoc)
+
+	/**
+	 * (non-Javadoc)
+	 * 
 	 * @see org.springframework.core.convert.converter.Converter#convert(java.lang.Object)
 	 */
 	@Override
 	public UtilisateurForm convert(UtilisateurEntite utilisateurEntite) {
-		UtilisateurForm utilisateurForm = new UtilisateurForm(); 
-		
-		utilisateurForm.setIdUtilisateur(utilisateurEntite.getIdUtilisateur());
-		utilisateurForm.setNom(utilisateurEntite.getNom());
-		utilisateurForm.setPrenom(utilisateurEntite.getPrenom());
-		utilisateurForm.setPseudo(utilisateurEntite.getPseudo());
-		utilisateurForm.setEmail(utilisateurEntite.getEmail());
-		utilisateurForm.setUrlImage(utilisateurEntite.getUrlImage());
-		
-		utilisateurForm.setRole(roleConvert.convert(utilisateurEntite.getRole()));
-		
+
+		UtilisateurForm utilisateurForm = null;
+
+		if (utilisateurEntite != null && utilisateurEntite.getIdUtilisateur() != null) {
+			utilisateurForm = new UtilisateurForm();
+			utilisateurForm.setIdUtilisateur(utilisateurEntite.getIdUtilisateur());
+			utilisateurForm.setNom(utilisateurEntite.getNom());
+			utilisateurForm.setPrenom(utilisateurEntite.getPrenom());
+			utilisateurForm.setPseudo(utilisateurEntite.getPseudo());
+			utilisateurForm.setEmail(utilisateurEntite.getEmail());
+			utilisateurForm.setUrlImage(utilisateurEntite.getUrlImage());
+			utilisateurForm.setTel(utilisateurEntite.getTel());
+			utilisateurForm.setGoogleConnect(utilisateurEntite.isGoogleConnect());
+
+			utilisateurForm.setRole(roleConvert.convert(utilisateurEntite.getRole()));
+		}
+
 		return utilisateurForm;
 	}
 
@@ -41,10 +48,10 @@ public class UtilisateurEntiteToUtilisateurForm implements Converter<Utilisateur
 	 * @return List<UtilisateurForm>
 	 */
 	public List<UtilisateurForm> convertList(List<UtilisateurEntite> listEntite) {
-		List<UtilisateurForm> utilisateurForms = new ArrayList<>(); 
-		
+		List<UtilisateurForm> utilisateurForms = new ArrayList<>();
+
 		for (UtilisateurEntite entite : listEntite) {
-			utilisateurForms.add(convert(entite)); 
+			utilisateurForms.add(convert(entite));
 		}
 		return utilisateurForms;
 	}

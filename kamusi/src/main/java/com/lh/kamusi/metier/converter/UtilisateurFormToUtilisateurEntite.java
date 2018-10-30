@@ -24,6 +24,8 @@ public class UtilisateurFormToUtilisateurEntite implements Converter<Utilisateur
 		utilisateurEntite.setPseudo(utilisateurForm.getPseudo());
 		utilisateurEntite.setEmail(utilisateurForm.getEmail());
 		utilisateurEntite.setUrlImage(utilisateurForm.getUrlImage());
+		utilisateurEntite.setTel(utilisateurForm.getTel());
+		utilisateurEntite.setGoogleConnect(utilisateurForm.isGoogleConnect());
 		
 		utilisateurEntite.setRole(roleConvert.convert(utilisateurForm.getRole()));
 		

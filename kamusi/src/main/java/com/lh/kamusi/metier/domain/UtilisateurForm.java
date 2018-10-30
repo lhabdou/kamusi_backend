@@ -25,7 +25,11 @@ public class UtilisateurForm implements Serializable {
 
 	private String pseudo;
 
+	private String tel;
+	
 	private String email;
+	
+	private boolean googleConnect;
 
 	private String urlImage;
 
@@ -127,6 +131,34 @@ public class UtilisateurForm implements Serializable {
 	 */
 	public void setRole(RoleForm role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the tel
+	 */
+	public String getTel() {
+		return tel;
+	}
+
+	/**
+	 * @param tel the tel to set
+	 */
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	/**
+	 * @return the googleConnect
+	 */
+	public boolean isGoogleConnect() {
+		return googleConnect;
+	}
+
+	/**
+	 * @param googleConnect the googleConnect to set
+	 */
+	public void setGoogleConnect(boolean googleConnect) {
+		this.googleConnect = googleConnect;
 	}
 
 	

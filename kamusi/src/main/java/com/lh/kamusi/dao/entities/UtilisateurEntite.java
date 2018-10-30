@@ -32,9 +32,15 @@ public class UtilisateurEntite implements Serializable {
 
 	@Column(name = "pseudo")
 	private String pseudo;
-
+	
+	@Column(name = "tel")
+	private String tel;
+	
 	@Column(name = "email", unique = true)
 	private String email;
+	
+	@Column(name = "google_connect")
+	private boolean googleConnect;
 
 	@Column(name = "url_image")
 	private String urlImage;
@@ -140,6 +146,34 @@ public class UtilisateurEntite implements Serializable {
 	 */
 	public void setRole(RoleEntite role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the tel
+	 */
+	public String getTel() {
+		return tel;
+	}
+
+	/**
+	 * @param tel the tel to set
+	 */
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	/**
+	 * @return the googleConnect
+	 */
+	public boolean isGoogleConnect() {
+		return googleConnect;
+	}
+
+	/**
+	 * @param googleConnect the googleConnect to set
+	 */
+	public void setGoogleConnect(boolean googleConnect) {
+		this.googleConnect = googleConnect;
 	}
 	
 	

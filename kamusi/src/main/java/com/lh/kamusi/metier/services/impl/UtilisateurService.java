@@ -5,6 +5,8 @@ package com.lh.kamusi.metier.services.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ import com.lh.kamusi.metier.services.IUtilisateurService;
  *
  */
 @Service
+@Transactional
 public class UtilisateurService implements IUtilisateurService {
 
 	@Autowired
@@ -56,9 +59,9 @@ public class UtilisateurService implements IUtilisateurService {
 	 */
 	@Override
 	public UtilisateurForm enregistrerUtilisateur(UtilisateurForm utilisateurForm) {
-
-		return utilisateurEntiteToUtilisateurForm
-				.convert(utilisateurRepository.save(utilisateurFormToUtilisateurEntite.convert(utilisateurForm)));
+		UtilisateurEntite userEntite = utilisateurFormToUtilisateurEntite.convert(utilisateurForm);
+		UtilisateurEntite userSaved = utilisateurRepository.save(userEntite);
+		return utilisateurEntiteToUtilisateurForm.convert(userSaved);
 	}
 
 	/**
@@ -70,22 +73,21 @@ public class UtilisateurService implements IUtilisateurService {
 	@Override
 	public void supprimerUtilisateur(String uid) {
 		List<LigneDictionnaireEntite> motsUser = dictionnaireRepository.listerLesMotsParUserId(uid);
-		
-		if( motsUser!= null && !motsUser.isEmpty()) {
-			
+
+		if (motsUser != null && !motsUser.isEmpty()) {
+
 			UtilisateurEntite admin = utilisateurRepository.getAdminUser();
-			
+
 			for (LigneDictionnaireEntite ligneDictionnaireEntite : motsUser) {
-				
+
 				ligneDictionnaireEntite.setUtilisateur(admin);
-				
+
 			}
-			
-			dictionnaireRepository.saveAll(motsUser);			
-		} 
-		
-			utilisateurRepository.deleteById(uid);
-		
+
+			dictionnaireRepository.saveAll(motsUser);
+		}
+
+		utilisateurRepository.deleteById(uid);
 
 	}
 
@@ -108,7 +110,8 @@ public class UtilisateurService implements IUtilisateurService {
 	@Override
 	public UtilisateurForm getProfileUtilisateur(String uid) {
 
-		return utilisateurEntiteToUtilisateurForm.convert(utilisateurRepository.getOne(uid));
+		return utilisateurEntiteToUtilisateurForm.convert(utilisateurRepository.getUserIfExist(uid));
+
 	}
 
 }
