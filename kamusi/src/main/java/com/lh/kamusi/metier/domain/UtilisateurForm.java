@@ -29,6 +29,8 @@ public class UtilisateurForm implements Serializable {
 	
 	private String email;
 	
+	private PaysForm pays;
+	
 	private boolean googleConnect;
 
 	private String urlImage;
@@ -161,6 +163,18 @@ public class UtilisateurForm implements Serializable {
 		this.googleConnect = googleConnect;
 	}
 
-	
+	/**
+	 * @return the pays
+	 */
+	public PaysForm getPays() {
+		return pays;
+	}
+
+	/**
+	 * @param pays the pays to set
+	 */
+	public void setPays(PaysForm pays) {
+		this.pays = pays;
+	}
 	
 }

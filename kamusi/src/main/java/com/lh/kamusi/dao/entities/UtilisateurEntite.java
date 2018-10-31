@@ -39,6 +39,9 @@ public class UtilisateurEntite implements Serializable {
 	@Column(name = "email", unique = true)
 	private String email;
 	
+	@Column(name = "pays")
+	private PaysEntite pays;
+	
 	@Column(name = "google_connect")
 	private boolean googleConnect;
 
@@ -174,6 +177,20 @@ public class UtilisateurEntite implements Serializable {
 	 */
 	public void setGoogleConnect(boolean googleConnect) {
 		this.googleConnect = googleConnect;
+	}
+
+	/**
+	 * @return the pays
+	 */
+	public PaysEntite getPays() {
+		return pays;
+	}
+
+	/**
+	 * @param pays the pays to set
+	 */
+	public void setPays(PaysEntite pays) {
+		this.pays = pays;
 	}
 	
 	
