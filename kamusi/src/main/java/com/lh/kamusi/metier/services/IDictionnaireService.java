@@ -12,9 +12,10 @@ public interface IDictionnaireService {
 	
 	/**
 	 * @param motCle
+	 * @param langue 
 	 * @return List<LigneDictionnaire>
 	 */
-	List<LigneDictionnaireForm> listerLesmotsFr(String motCle); 
+	List<LigneDictionnaireForm> listerLesMots(String motCle, String langue); 
 	
 	/**
 	 * @return List<LigneDictionnaire>

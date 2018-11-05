@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,9 +35,9 @@ public class DictionnaireRestController {
 	 * @return ResponseEntity<List<LigneDictionnaire>>
 	 */
 	@RequestMapping(value = "/rechercher/{motCle}", method = RequestMethod.GET)
-	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsFr(@PathVariable("motCle") String motCle) {
+	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsFr(@PathVariable("motCle") String motCle, @RequestHeader(value = "langue") String langue) {
 
-		return new ResponseEntity<>(dictionnaireServices.listerLesmotsFr(motCle), HttpStatus.OK);
+		return new ResponseEntity<>(dictionnaireServices.listerLesMots(motCle, langue), HttpStatus.OK);
 
 	}
 	

@@ -17,7 +17,21 @@ public interface DictionnaireRepository extends JpaRepository<LigneDictionnaireE
 			+ "inner join fetch u.role "
 			+ "inner join fetch d.statut "
 			+ "where lower(mot_fr) LIKE CONCAT('%',:motCle,'%')") 
-	List<LigneDictionnaireEntite> listerLesMots (@Param("motCle") String motCle);
+	List<LigneDictionnaireEntite> listerLesMotsFr (@Param("motCle") String motCle);
+	
+	@Query("select d from LigneDictionnaireEntite d "
+			+ "inner join fetch d.utilisateur u "
+			+ "inner join fetch u.role "
+			+ "inner join fetch d.statut "
+			+ "where lower(mot_ngz) LIKE CONCAT('%',:motCle,'%')") 
+	List<LigneDictionnaireEntite> listerLesMotsNgz (@Param("motCle") String motCle);
+	
+	@Query("select d from LigneDictionnaireEntite d "
+			+ "inner join fetch d.utilisateur u "
+			+ "inner join fetch u.role "
+			+ "inner join fetch d.statut "
+			+ "where lower(mot_ang) LIKE CONCAT('%',:motCle,'%')") 
+	List<LigneDictionnaireEntite> listerLesMotsAng (@Param("motCle") String motCle);
 	
 	@Query("select d from LigneDictionnaireEntite d "
 			+ "inner join fetch d.utilisateur u "

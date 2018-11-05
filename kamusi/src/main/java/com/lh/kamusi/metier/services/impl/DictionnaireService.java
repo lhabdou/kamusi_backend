@@ -39,10 +39,29 @@ public class DictionnaireService implements IDictionnaireService {
 	 * @see com.lh.kamusi.metier.services.IDictionnaireService#listerLesmotsFr(java.lang.String)
 	 */
 	@Override
-	public List<LigneDictionnaireForm> listerLesmotsFr(String motCle) {
+	public List<LigneDictionnaireForm> listerLesMots(String motCle, String langue) {
 
-		List<LigneDictionnaireEntite> lignesDictionnaireEntites = dictionnaireRepository
-				.listerLesMots(motCle.toLowerCase());
+		List<LigneDictionnaireEntite> lignesDictionnaireEntites = null;
+
+		switch (langue.toLowerCase()) {
+
+		case "fr":
+			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsFr(motCle.toLowerCase());
+
+			break;
+		case "ngz":
+			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsNgz(motCle.toLowerCase());
+
+			break;
+			
+		case "ang":
+			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsAng(motCle.toLowerCase());
+
+			break;
+
+		default:
+			break;
+		}
 
 		return transformerMotsEntiteEnMotsForm(lignesDictionnaireEntites);
 	}
@@ -170,12 +189,15 @@ public class DictionnaireService implements IDictionnaireService {
 	private List<LigneDictionnaireForm> transformerMotsEntiteEnMotsForm(
 			List<LigneDictionnaireEntite> lignesDictionnaireEntites) {
 		List<LigneDictionnaireForm> ligneDictionnaireForms = new ArrayList<>();
+		if (lignesDictionnaireEntites != null) {
 
-		for (LigneDictionnaireEntite ligneDictionnaireE : lignesDictionnaireEntites) {
+			for (LigneDictionnaireEntite ligneDictionnaireE : lignesDictionnaireEntites) {
 
-			ligneDictionnaireForms.add(dictionnaireEntiteToDictionnaireForm.convert(ligneDictionnaireE));
+				ligneDictionnaireForms.add(dictionnaireEntiteToDictionnaireForm.convert(ligneDictionnaireE));
 
+			}
 		}
+		
 		return ligneDictionnaireForms;
 	}
 
