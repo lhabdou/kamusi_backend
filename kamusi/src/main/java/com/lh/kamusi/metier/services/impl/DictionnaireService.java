@@ -21,6 +21,12 @@ import com.lh.kamusi.metier.services.impl.enumerateur.RolesStatuts;
 @Service
 public class DictionnaireService implements IDictionnaireService {
 
+	public static final String ANG = "ang";
+
+	public static final String NGZ = "ngz";
+
+	public static final String FR = "fr";
+
 	@Autowired
 	private DictionnaireRepository dictionnaireRepository;
 
@@ -45,16 +51,16 @@ public class DictionnaireService implements IDictionnaireService {
 
 		switch (langue.toLowerCase()) {
 
-		case "fr":
+		case FR:
 			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsFr(motCle.toLowerCase());
 
 			break;
-		case "ngz":
+		case NGZ:
 			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsNgz(motCle.toLowerCase());
 
 			break;
 			
-		case "ang":
+		case ANG:
 			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsAng(motCle.toLowerCase());
 
 			break;
