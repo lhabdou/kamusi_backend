@@ -39,7 +39,8 @@ public class UtilisateurEntite implements Serializable {
 	@Column(name = "email", unique = true)
 	private String email;
 	
-	@Column(name = "pays")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "pays")
 	private PaysEntite pays;
 	
 	@Column(name = "google_connect")

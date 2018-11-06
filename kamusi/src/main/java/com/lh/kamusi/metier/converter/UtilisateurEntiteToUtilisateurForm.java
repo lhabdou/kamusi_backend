@@ -15,6 +15,9 @@ public class UtilisateurEntiteToUtilisateurForm implements Converter<Utilisateur
 
 	@Autowired
 	RoleEntiteToRoleForm roleConvert;
+	
+	@Autowired
+	PaysEntiteToPaysForm paysConvert;
 
 	/**
 	 * (non-Javadoc)
@@ -38,6 +41,10 @@ public class UtilisateurEntiteToUtilisateurForm implements Converter<Utilisateur
 			utilisateurForm.setGoogleConnect(utilisateurEntite.isGoogleConnect());
 
 			utilisateurForm.setRole(roleConvert.convert(utilisateurEntite.getRole()));
+			if(utilisateurEntite.getPays() != null) {
+				utilisateurForm.setPays(paysConvert.convert(utilisateurEntite.getPays()));
+			}
+			
 		}
 
 		return utilisateurForm;

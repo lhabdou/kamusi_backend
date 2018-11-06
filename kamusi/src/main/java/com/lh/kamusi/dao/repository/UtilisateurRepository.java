@@ -23,6 +23,7 @@ public interface UtilisateurRepository extends JpaRepository<UtilisateurEntite, 
 
 	@Query("Select u from UtilisateurEntite u "
 			+ "inner join fetch u.role "
+			+ "left join fetch u.pays "
 			+ "where u.idUtilisateur = :uid")
 	UtilisateurEntite getUserIfExist(@Param("uid") String uid);
 	
