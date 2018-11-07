@@ -30,7 +30,7 @@ public class DictionnaireEntiteToDictionnaireForm implements Converter<LigneDict
 		dictionnaire.setMotMwa(dictionnaireEntite.getMotMwa());
 		dictionnaire.setSuggestion(dictionnaireEntite.getSuggestion());
 		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionCom());
-		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionFr());
+		dictionnaire.setDefinitionFr(dictionnaireEntite.getDefinitionFr());
 		dictionnaire.setUtilisateur(utilisateurConvert.convert(dictionnaireEntite.getUtilisateur()));
 		dictionnaire.setStatut(statutEntiteToStatutForm.convert(dictionnaireEntite.getStatut()));
 		
@@ -49,7 +49,7 @@ public class DictionnaireEntiteToDictionnaireForm implements Converter<LigneDict
 		dictionnaire.setMotMwa(dictionnaireEntite.getMotMwa());
 		dictionnaire.setSuggestion(dictionnaireEntite.getSuggestion());
 		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionCom());
-		dictionnaire.setDefinitionCom(dictionnaireEntite.getDefinitionFr());
+		dictionnaire.setDefinitionFr(dictionnaireEntite.getDefinitionFr());
 		dictionnaire.setUtilisateur(utilisateurConvert.convert(dictionnaireEntite.getUtilisateur()));
 		
 		return dictionnaire;

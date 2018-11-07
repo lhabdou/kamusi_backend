@@ -1,6 +1,7 @@
 package com.lh.kamusi.dao.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -55,6 +56,12 @@ public class DictionnaireTempEntite implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_statut")
     private StatutEntite statut;
+    
+    @Column(name="date_modification")
+    private Date dateModification;
+    
+    @Column(name="dialect_modifie")
+    private String dialectModifie;
 
 	/**
 	 * @return the mot_ang
@@ -194,6 +201,34 @@ public class DictionnaireTempEntite implements Serializable {
 	 */
 	public void setDefinitionCom(String definitionCom) {
 		this.definitionCom = definitionCom;
+	}
+
+	/**
+	 * @return the dateModification
+	 */
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	/**
+	 * @param dateModification the dateModification to set
+	 */
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
+
+	/**
+	 * @return the dialectModifie
+	 */
+	public String getDialectModifie() {
+		return dialectModifie;
+	}
+
+	/**
+	 * @param dialectModifie the dialectModifie to set
+	 */
+	public void setDialectModifie(String dialectModifie) {
+		this.dialectModifie = dialectModifie;
 	}
 
 	

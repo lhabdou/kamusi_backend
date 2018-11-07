@@ -34,6 +34,8 @@ public class LigneDictionnaireForm implements Serializable {
     private String definitionCom;
     
     private String suggestion; 
+    
+    private String dialectModifie;
 
     private UtilisateurForm utilisateur;
 
@@ -94,6 +96,20 @@ public class LigneDictionnaireForm implements Serializable {
 	 */
 	public void setMotNdz(String motNdz) {
 		this.motNdz = motNdz;
+	}
+
+	/**
+	 * @return the dialectModifie
+	 */
+	public String getDialectModifie() {
+		return dialectModifie;
+	}
+
+	/**
+	 * @param dialectModifie the dialectModifie to set
+	 */
+	public void setDialectModifie(String dialectModifie) {
+		this.dialectModifie = dialectModifie;
 	}
 
 	/**

@@ -73,6 +73,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		StringBuilder localisationErreur = new StringBuilder();
 		localisationErreur.append(exception.getStackTrace()[0].getMethodName());
 		localisationErreur.append(exception.getStackTrace()[0].getClassName());
+		localisationErreur.append(", ligne: ");
 		localisationErreur.append(exception.getStackTrace()[0].getLineNumber());
 		return new Erreur(statutHttp.value(), libelleErreur, localisationErreur.toString());
 	}

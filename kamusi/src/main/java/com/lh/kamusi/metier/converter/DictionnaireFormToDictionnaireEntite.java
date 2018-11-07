@@ -14,6 +14,9 @@ public class DictionnaireFormToDictionnaireEntite implements Converter<LigneDict
 
 	@Autowired
 	private StatutFormToStatutEntite statutFormToStatutEntite;
+	
+	@Autowired
+	private UtilisateurFormToUtilisateurEntite utilisateurFormToUtilisateurEntite;
 
 	@Override
 	public LigneDictionnaireEntite convert(LigneDictionnaireForm dictionnaireForm) {
@@ -31,7 +34,8 @@ public class DictionnaireFormToDictionnaireEntite implements Converter<LigneDict
 		dictionnaireEntite.setDefinitionCom(dictionnaireForm.getDefinitionCom());
 		dictionnaireEntite.setDefinitionFr(dictionnaireForm.getDefinitionFr());
 		dictionnaireEntite.setStatut(statutFormToStatutEntite.convert(dictionnaireForm.getStatut()));
-
+		dictionnaireEntite.setUtilisateur(utilisateurFormToUtilisateurEntite.convert(dictionnaireForm.getUtilisateur()));
+		
 		return dictionnaireEntite;
 	}
 

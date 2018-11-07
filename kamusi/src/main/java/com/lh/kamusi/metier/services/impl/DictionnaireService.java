@@ -10,8 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.lh.kamusi.dao.entities.DictionnaireTempEntite;
 import com.lh.kamusi.dao.entities.LigneDictionnaireEntite;
+import com.lh.kamusi.dao.entities.MotsUsersEntite;
+import com.lh.kamusi.dao.entities.StatutEntite;
+import com.lh.kamusi.dao.entities.UtilisateurEntite;
+import com.lh.kamusi.dao.entities.pk.DictionnairePk;
 import com.lh.kamusi.dao.repository.DictionnaireRepository;
 import com.lh.kamusi.dao.repository.DictionnaireTempRepository;
+import com.lh.kamusi.dao.repository.MotsUsersRepository;
+import com.lh.kamusi.dao.repository.UtilisateurRepository;
 import com.lh.kamusi.metier.converter.DictionnaireEntiteToDictionnaireForm;
 import com.lh.kamusi.metier.converter.DictionnaireFormToDictionnaireEntite;
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
@@ -29,6 +35,12 @@ public class DictionnaireService implements IDictionnaireService {
 
 	@Autowired
 	private DictionnaireRepository dictionnaireRepository;
+	
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
+	
+	@Autowired
+	private MotsUsersRepository motsUsersRepository;
 
 	@Autowired
 	private DictionnaireTempRepository dictionnaireTempRepository;
@@ -136,14 +148,20 @@ public class DictionnaireService implements IDictionnaireService {
 	 *      modifierUneLigneDictionnaire(com.lh.kamusi.metier.domain.LigneDictionnaireForm)
 	 */
 	@Override
-	public LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire) {
+	public LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire, String uid) {
 
-		LigneDictionnaireForm ligneDictionnaireForm = new LigneDictionnaireForm();
+		LigneDictionnaireForm ligneDictionnaireForm;
+		MotsUsersEntite modificationHistorise = new MotsUsersEntite();
 
-		String role = ligneDictionnaireForm.getUtilisateur().getRole().getRole();
+		String role = ligneDictionnaire.getUtilisateur().getRole().getRole();
+		UtilisateurEntite user = utilisateurRepository.getOne(uid);
 
 		List<String> listeRoleMajor = Arrays.asList(RolesStatuts.ROLE_ADMIN.getValue(),
 				RolesStatuts.ROLE_VALIDEUR.getValue());
+		
+		modificationHistorise.setDateModification(new Date());
+		modificationHistorise.setIdUser(ligneDictionnaire.getUtilisateur().getIdUtilisateur());
+		modificationHistorise.setMot(ligneDictionnaire.getMotFr());
 
 		if (listeRoleMajor.contains(role.toUpperCase())) {
 
@@ -153,6 +171,8 @@ public class DictionnaireService implements IDictionnaireService {
 
 			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireRepository
 					.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
+			
+			motsUsersRepository.save(modificationHistorise);
 
 		} else {
 
@@ -164,16 +184,45 @@ public class DictionnaireService implements IDictionnaireService {
 					.chercherAncienneLigne(ligneDictionnaire.getMotFr());
 			ancienneLigne.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
 			// ajout dans la table temporaire
-			dictionnaireTempRepository.saveAndFlush(ancienneLigne);
+			DictionnaireTempEntite ligneTemp = convertLigneDictionnaireToTemp(ligneDictionnaire, ligneDictionnaire.getDialectModifie(), user);
+			
+			dictionnaireTempRepository.saveAndFlush(ligneTemp);
 			// suppression de l'ancienne ligne dans la table principale
 			dictionnaireRepository.delete(ancienneLigne);
 
 			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireTempRepository
-					.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
+					.save(dictionnaireTempFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
 		}
+		
+		motsUsersRepository.save(modificationHistorise);
 
 		return ligneDictionnaireForm;
+	}
+
+	private DictionnaireTempEntite convertLigneDictionnaireToTemp(LigneDictionnaireForm newProposition, String dialect, UtilisateurEntite user) {
+		
+		DictionnaireTempEntite ligneTemp = new DictionnaireTempEntite();
+		ligneTemp.setDateModification(new Date());
+		ligneTemp.setDefinitionCom(newProposition.getDefinitionFr());
+		ligneTemp.setDefinitionFr(newProposition.getDefinitionFr());
+		ligneTemp.setDialectModifie(dialect);
+		DictionnairePk dictionnairePk = new DictionnairePk();
+		dictionnairePk.setMotFr(newProposition.getMotFr());
+		dictionnairePk.setMotNgz(newProposition.getMotNgz());
+		ligneTemp.setDictionnairePk(dictionnairePk);
+		ligneTemp.setMotAng(newProposition.getMotAng());
+		ligneTemp.setMotMao(newProposition.getMotMao());
+		ligneTemp.setMotMwa(newProposition.getMotMwa());
+		ligneTemp.setMotNdz(newProposition.getMotNdz());
+		ligneTemp.setStatut(new StatutEntite());
+		ligneTemp.getStatut().setId_statut(RolesStatuts.STATUT_AVALIDER.getId());
+		ligneTemp.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
+		ligneTemp.setSuggestion(newProposition.getSuggestion());
+		
+		ligneTemp.setUtilisateur(user);
+		
+		return ligneTemp;
 	}
 
 	/**

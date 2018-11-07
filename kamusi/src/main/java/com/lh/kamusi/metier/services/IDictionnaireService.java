@@ -41,8 +41,9 @@ public interface IDictionnaireService {
 	
 	/**
 	 * @param ligneDictionnaire
+	 * @param uid 
 	 */
-	LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire); 
+	LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire, String uid); 
 	
 
 }

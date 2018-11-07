@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
 import com.lh.kamusi.metier.services.IDictionnaireService;
+import com.lh.kamusi.rest.firebase.FirebaseVerification;
 
 @RestController
 @CrossOrigin("http://localhost:8100")
@@ -27,6 +29,8 @@ public class DictionnaireRestController {
 	 */
 	@Autowired
 	private IDictionnaireService dictionnaireServices;
+	@Autowired
+	private FirebaseVerification firebaseVerification;
 
 	/**
 	 * lister les mots en français
@@ -35,33 +39,38 @@ public class DictionnaireRestController {
 	 * @return ResponseEntity<List<LigneDictionnaire>>
 	 */
 	@RequestMapping(value = "/rechercher/{motCle}", method = RequestMethod.GET)
-	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsFr(@PathVariable("motCle") String motCle, @RequestHeader(value = "langue") String langue) {
+	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsFr(@PathVariable("motCle") String motCle,
+			@RequestHeader(value = "langue") String langue) {
 
 		return new ResponseEntity<>(dictionnaireServices.listerLesMots(motCle, langue), HttpStatus.OK);
 
 	}
-	
+
 	/**
 	 * @param ligneDictionnaireForm
 	 * @return ResponseEntity<LigneDictionnaireForm>
+	 * @throws FirebaseAuthException 
 	 */
-	@RequestMapping(value = "/modifierligne", method = RequestMethod.PUT)
+	@RequestMapping(value = "/valider", method = RequestMethod.PUT)
 	public ResponseEntity<LigneDictionnaireForm> modifierLigneDictionnaire(
-			@RequestBody LigneDictionnaireForm ligneDictionnaireForm) {
-
-		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm),
+			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token) throws FirebaseAuthException {
+		String uid = firebaseVerification.getUserIdFromIdToken(token);
+		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm, uid),
 				HttpStatus.OK);
 	}
-	
+
 	/**
 	 * @param ligneDictionnaireForm
 	 * @return ResponseEntity<LigneDictionnaireForm>
+	 * @throws FirebaseAuthException
 	 */
 	@RequestMapping(value = "/proposermodification", method = RequestMethod.PUT)
-	public ResponseEntity<LigneDictionnaireForm> proposerModification (
-			@RequestBody LigneDictionnaireForm ligneDictionnaireForm) {
+	public ResponseEntity<LigneDictionnaireForm> proposerModification(
+			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token)
+			throws FirebaseAuthException {
 
-		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm),
+		String uid = firebaseVerification.getUserIdFromIdToken(token);
+		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm, uid),
 				HttpStatus.OK);
 	}
 

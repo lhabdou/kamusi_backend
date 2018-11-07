@@ -6,9 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.lh.kamusi.dao.entities.DictionnaireTempEntite;
-import com.lh.kamusi.dao.entities.LigneDictionnaireEntite;
 
-public interface DictionnaireTempRepository extends JpaRepository<LigneDictionnaireEntite, String> {
+public interface DictionnaireTempRepository extends JpaRepository<DictionnaireTempEntite, String> {
 	
 	
 	@Query("select d from DictionnaireTempEntite d "
