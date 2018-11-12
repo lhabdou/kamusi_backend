@@ -35,10 +35,10 @@ public class DictionnaireService implements IDictionnaireService {
 
 	@Autowired
 	private DictionnaireRepository dictionnaireRepository;
-	
+
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
-	
+
 	@Autowired
 	private MotsUsersRepository motsUsersRepository;
 
@@ -71,7 +71,7 @@ public class DictionnaireService implements IDictionnaireService {
 			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsNgz(motCle.toLowerCase());
 
 			break;
-			
+
 		case ANG:
 			lignesDictionnaireEntites = dictionnaireRepository.listerLesMotsAng(motCle.toLowerCase());
 
@@ -158,7 +158,7 @@ public class DictionnaireService implements IDictionnaireService {
 
 		List<String> listeRoleMajor = Arrays.asList(RolesStatuts.ROLE_ADMIN.getValue(),
 				RolesStatuts.ROLE_VALIDEUR.getValue());
-		
+
 		modificationHistorise.setDateModification(new Date());
 		modificationHistorise.setIdUser(ligneDictionnaire.getUtilisateur().getIdUtilisateur());
 		modificationHistorise.setMot(ligneDictionnaire.getMotFr());
@@ -171,7 +171,7 @@ public class DictionnaireService implements IDictionnaireService {
 
 			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireRepository
 					.saveAndFlush(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
-			
+
 			motsUsersRepository.save(modificationHistorise);
 
 		} else {
@@ -184,24 +184,26 @@ public class DictionnaireService implements IDictionnaireService {
 					.chercherAncienneLigne(ligneDictionnaire.getMotFr());
 			ancienneLigne.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
 			// ajout dans la table temporaire
-			DictionnaireTempEntite ligneTemp = convertLigneDictionnaireToTemp(ligneDictionnaire, ligneDictionnaire.getDialectModifie(), user);
-			
+			DictionnaireTempEntite ligneTemp = convertLigneDictionnaireToTemp(ligneDictionnaire,
+					ligneDictionnaire.getDialectModifie(), user);
+
 			dictionnaireTempRepository.saveAndFlush(ligneTemp);
 			// suppression de l'ancienne ligne dans la table principale
 			dictionnaireRepository.delete(ancienneLigne);
 
-			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convert(dictionnaireTempRepository
-					.save(dictionnaireTempFormToDictionnaireEntite.convert(ligneDictionnaire)));
+			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm.convertTemp(dictionnaireTempRepository
+					.save(dictionnaireFormToDictionnaireEntite.convertTemp(ligneDictionnaire)));
 
 		}
-		
+
 		motsUsersRepository.save(modificationHistorise);
 
 		return ligneDictionnaireForm;
 	}
 
-	private DictionnaireTempEntite convertLigneDictionnaireToTemp(LigneDictionnaireForm newProposition, String dialect, UtilisateurEntite user) {
-		
+	private DictionnaireTempEntite convertLigneDictionnaireToTemp(LigneDictionnaireForm newProposition, String dialect,
+			UtilisateurEntite user) {
+
 		DictionnaireTempEntite ligneTemp = new DictionnaireTempEntite();
 		ligneTemp.setDateModification(new Date());
 		ligneTemp.setDefinitionCom(newProposition.getDefinitionFr());
@@ -219,9 +221,9 @@ public class DictionnaireService implements IDictionnaireService {
 		ligneTemp.getStatut().setId_statut(RolesStatuts.STATUT_AVALIDER.getId());
 		ligneTemp.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
 		ligneTemp.setSuggestion(newProposition.getSuggestion());
-		
+
 		ligneTemp.setUtilisateur(user);
-		
+
 		return ligneTemp;
 	}
 
@@ -252,7 +254,7 @@ public class DictionnaireService implements IDictionnaireService {
 
 			}
 		}
-		
+
 		return ligneDictionnaireForms;
 	}
 

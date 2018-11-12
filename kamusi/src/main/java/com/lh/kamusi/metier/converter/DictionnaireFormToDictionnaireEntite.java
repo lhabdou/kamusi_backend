@@ -54,6 +54,8 @@ public class DictionnaireFormToDictionnaireEntite implements Converter<LigneDict
 		dictionnaireEntite.setDefinitionCom(dictionnaireForm.getDefinitionCom());
 		dictionnaireEntite.setDefinitionFr(dictionnaireForm.getDefinitionFr());
 		dictionnaireEntite.setStatut(statutFormToStatutEntite.convert(dictionnaireForm.getStatut()));
+		dictionnaireEntite.setUtilisateur(utilisateurFormToUtilisateurEntite.convert(dictionnaireForm.getUtilisateur()));
+
 
 		return dictionnaireEntite;
 	}
