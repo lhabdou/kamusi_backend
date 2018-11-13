@@ -49,23 +49,10 @@ public class DictionnaireRestController {
 	/**
 	 * @param ligneDictionnaireForm
 	 * @return ResponseEntity<LigneDictionnaireForm>
-	 * @throws FirebaseAuthException 
-	 */
-	@RequestMapping(value = "/valider", method = RequestMethod.PUT)
-	public ResponseEntity<LigneDictionnaireForm> modifierLigneDictionnaire(
-			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token) throws FirebaseAuthException {
-		String uid = firebaseVerification.getUserIdFromIdToken(token);
-		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm, uid),
-				HttpStatus.OK);
-	}
-
-	/**
-	 * @param ligneDictionnaireForm
-	 * @return ResponseEntity<LigneDictionnaireForm>
 	 * @throws FirebaseAuthException
 	 */
-	@RequestMapping(value = "/proposermodification", method = RequestMethod.PUT)
-	public ResponseEntity<LigneDictionnaireForm> proposerModification(
+	@RequestMapping(value = {"/proposermodification", "/valider"}, method = RequestMethod.PUT)
+	public ResponseEntity<LigneDictionnaireForm> validerOuProposerModification(
 			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token)
 			throws FirebaseAuthException {
 

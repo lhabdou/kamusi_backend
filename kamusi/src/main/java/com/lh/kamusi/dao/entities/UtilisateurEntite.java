@@ -52,6 +52,9 @@ public class UtilisateurEntite implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_role")
 	private RoleEntite role;
+	
+	@Column(name = "compteur")
+	private Integer compteur;
 
 	/**
 	 * @return the id_utilisateur
@@ -192,6 +195,20 @@ public class UtilisateurEntite implements Serializable {
 	 */
 	public void setPays(PaysEntite pays) {
 		this.pays = pays;
+	}
+
+	/**
+	 * @return the compteur
+	 */
+	public Integer getCompteur() {
+		return compteur;
+	}
+
+	/**
+	 * @param compteur the compteur to set
+	 */
+	public void setCompteur(Integer compteur) {
+		this.compteur = compteur;
 	}
 	
 	
