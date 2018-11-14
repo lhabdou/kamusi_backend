@@ -1,5 +1,6 @@
 package com.lh.kamusi.rest.controllers;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class DictionnaireRestController {
 	private FirebaseVerification firebaseVerification;
 
 	/**
-	 * lister les mots en français
+	 * lister les mots en français en fonction d'un mot clé
 	 * 
 	 * @param motCle
 	 * @return ResponseEntity<List<LigneDictionnaire>>
@@ -47,11 +48,29 @@ public class DictionnaireRestController {
 	}
 
 	/**
+	 * lister les mots en français en fonction d'un mot clé
+	 * 
+	 * @param motCle
+	 * @return ResponseEntity<List<LigneDictionnaire>>
+	 * @throws FirebaseAuthException
+	 * @throws AccessDeniedException
+	 */
+	@RequestMapping(value = "/listerpropositions", method = RequestMethod.GET)
+	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsAValider(
+			@RequestHeader(value = "dialect") String dialect, @RequestHeader(value = "token") String token)
+			throws FirebaseAuthException, AccessDeniedException {
+
+		String uid = firebaseVerification.getUserIdFromIdToken(token);
+		return new ResponseEntity<>(dictionnaireServices.listerLesMotsAValider(dialect, uid), HttpStatus.OK);
+
+	}
+
+	/**
 	 * @param ligneDictionnaireForm
 	 * @return ResponseEntity<LigneDictionnaireForm>
 	 * @throws FirebaseAuthException
 	 */
-	@RequestMapping(value = {"/proposermodification", "/valider"}, method = RequestMethod.PUT)
+	@RequestMapping(value = {"/proposermodification", "/valider" }, method = RequestMethod.PUT)
 	public ResponseEntity<LigneDictionnaireForm> validerOuProposerModification(
 			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token)
 			throws FirebaseAuthException {

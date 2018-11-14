@@ -1,5 +1,6 @@
 package com.lh.kamusi.metier.services;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
@@ -16,11 +17,6 @@ public interface IDictionnaireService {
 	 * @return List<LigneDictionnaire>
 	 */
 	List<LigneDictionnaireForm> listerLesMots(String motCle, String langue); 
-	
-	/**
-	 * @return List<LigneDictionnaire>
-	 */
-	List<LigneDictionnaireForm> listerLesmotsAvalider(); 
 	
 	/**
 	 * @param ligneDictionnaire
@@ -43,7 +39,15 @@ public interface IDictionnaireService {
 	 * @param ligneDictionnaire
 	 * @param uid 
 	 */
-	LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire, String uid); 
+	LigneDictionnaireForm modifierUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire, String uid);
+
+	/**
+	 * @param dialect
+	 * @param uid
+	 * @return
+	 * @throws AccessDeniedException 
+	 */
+	List<LigneDictionnaireForm> listerLesMotsAValider(String dialect, String uid) throws AccessDeniedException; 
 	
 
 }

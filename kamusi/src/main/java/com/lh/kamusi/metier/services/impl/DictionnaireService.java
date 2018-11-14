@@ -1,5 +1,6 @@
 package com.lh.kamusi.metier.services.impl;
 
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -156,10 +157,8 @@ public class DictionnaireService implements IDictionnaireService {
 		LigneDictionnaireForm ligneDictionnaireForm;
 		MotsUsersEntite modificationHistorise = new MotsUsersEntite();
 
-		
 		UtilisateurEntite user = utilisateurRepository.getUserIfExist(uid);
 		String role = user.getRole().getNom_role();
-
 
 		List<String> listeRoleMajor = Arrays.asList(RolesStatuts.ROLE_ADMIN.getValue(),
 				RolesStatuts.ROLE_VALIDEUR.getValue());
@@ -169,11 +168,10 @@ public class DictionnaireService implements IDictionnaireService {
 
 		// ligne temp
 		DictionnaireTempEntite ligneTemp = dictionnaireFormToDictionnaireEntite.convertTemp(ligneDictionnaire);
-		
+
 		modificationHistorise.setDateModification(new Date());
 		modificationHistorise.setIdUser(ligneDictionnaire.getUtilisateur().getIdUtilisateur());
 		modificationHistorise.setMot(ligneDictionnaire.getMotFr());
-		
 
 		if (listeRoleMajor.contains(role.toUpperCase())) {
 
@@ -202,9 +200,9 @@ public class DictionnaireService implements IDictionnaireService {
 		} else {
 			// si user différent du dernier modificateur
 			// on attribue la modification au nouveau user
-			
+
 			if (ligneDictionnaire.getUtilisateur().getIdUtilisateur() != uid) {
-				
+
 				ligneDictionnaire.setUtilisateur(utilisateurEntiteToUserForm.convert(user));
 
 			}
@@ -212,12 +210,20 @@ public class DictionnaireService implements IDictionnaireService {
 			ligneDictionnaire.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
 			ligneDictionnaire.getStatut().setIdStatut(RolesStatuts.STATUT_AVALIDER.getId());
 			ligneDictionnaire.setDateModification(new Date());
-			
-			ancienneLigne.setStatut(new StatutEntite());
-			ancienneLigne.getStatut().setId_statut(RolesStatuts.STATUT_AVALIDER.getId());
-			ancienneLigne.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
-			
-			// changer de statut
+
+			// s'il s'agit d'une suggestion
+
+			if ("sug".equalsIgnoreCase(ligneDictionnaire.getDialectModifie())) {
+
+				ancienneLigne.setSuggestion(ligneDictionnaire.getSuggestion());
+
+			} else {
+				// changer de statut
+				ancienneLigne.setStatut(new StatutEntite());
+				ancienneLigne.getStatut().setId_statut(RolesStatuts.STATUT_AVALIDER.getId());
+				ancienneLigne.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
+			}
+
 			dictionnaireRepository.save(ancienneLigne);
 
 			// ajout dans la table temporaire
@@ -225,7 +231,7 @@ public class DictionnaireService implements IDictionnaireService {
 					.convertTemp(dictionnaireTempRepository.saveAndFlush(ligneTemp));
 
 		}
-		
+
 		motsUsersRepository.save(modificationHistorise);
 
 		return ligneDictionnaireForm;
@@ -234,11 +240,21 @@ public class DictionnaireService implements IDictionnaireService {
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see com.lh.kamusi.metier.services.IDictionnaireService#listerLesmotsAvalider()
+	 * @see com.lh.kamusi.metier.services.IDictionnaireService#listerLesMotsAValider(java.lang.String,
+	 *      java.lang.String)
 	 */
 	@Override
-	public List<LigneDictionnaireForm> listerLesmotsAvalider() {
-		List<DictionnaireTempEntite> motsAvalider = dictionnaireTempRepository.listerLesMots();
+	public List<LigneDictionnaireForm> listerLesMotsAValider(String dialect, String uid) throws AccessDeniedException {
+		List<DictionnaireTempEntite> motsAvalider;
+		UtilisateurEntite userEntite = utilisateurRepository.getUserIfExist(uid);
+		if (RolesStatuts.ROLE_ADMIN.getValue().equalsIgnoreCase(userEntite.getRole().getNom_role())
+				|| RolesStatuts.ROLE_VALIDEUR.getValue().equalsIgnoreCase(userEntite.getRole().getNom_role())) {
+
+			motsAvalider = dictionnaireTempRepository.listerLesMots(dialect);
+
+		} else {
+			throw new AccessDeniedException("Accès refusé");
+		}
 
 		return transformerMotsEntiteEnMotsFormTemp(motsAvalider);
 	}
