@@ -47,11 +47,11 @@ public class LigneDictionnaireEntite implements Serializable {
     @Column(name="definition_com")
     private String definitionCom; 
     
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur", nullable = false)
     private UtilisateurEntite utilisateur;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_statut")
     private StatutEntite statut;
 

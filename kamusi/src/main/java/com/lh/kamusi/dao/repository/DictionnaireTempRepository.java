@@ -14,7 +14,8 @@ public interface DictionnaireTempRepository extends JpaRepository<DictionnaireTe
 	@Query("select d from DictionnaireTempEntite d "
 			+ "left join fetch d.utilisateur u "
 			+ "join fetch d.statut s "
-			+ "where d.dialectModifie =:dialect") 
+			+ "where d.dialectModifie =:dialect "
+			+ "and d.statut.statut = 'A VALIDER'") 
 	List<DictionnaireTempEntite> listerLesMots(@Param("dialect") String dialect); 
 	
 	

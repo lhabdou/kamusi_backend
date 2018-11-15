@@ -1,5 +1,7 @@
 package com.lh.kamusi.metier.converter;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -54,6 +56,7 @@ public class DictionnaireFormToDictionnaireEntite implements Converter<LigneDict
 		dictionnaireEntite.setDefinitionCom(dictionnaireForm.getDefinitionCom());
 		dictionnaireEntite.setDefinitionFr(dictionnaireForm.getDefinitionFr());
 		dictionnaireEntite.setDialectModifie(dictionnaireForm.getDialectModifie());
+		dictionnaireEntite.setDateModification(new Date());
 		dictionnaireEntite.setStatut(statutFormToStatutEntite.convert(dictionnaireForm.getStatut()));
 		dictionnaireEntite.setUtilisateur(utilisateurFormToUtilisateurEntite.convert(dictionnaireForm.getUtilisateur()));
 
