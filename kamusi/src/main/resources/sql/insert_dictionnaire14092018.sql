@@ -9,8 +9,8 @@ INSERT INTO public.statut (id_statut, statut) VALUES (1,'NOUVEAU'),(2,'A VALIDER
 INSERT INTO public.dictionnaire(
             mot_fr, mot_ngz, mot_ndz, mot_mwa, mot_mao, mot_ang, id_utilisateur, 
             id_statut, suggestion, definition_fr, definition_com)
-    VALUES ('Manger', 'Hula', 'Hula', 'Wuya', 'Hula', 'To Eat', '6xhd95Kx3NPkVXKbfuh1LZYFMt83', 
+    VALUES ('Manger', 'Hula', 'Hula', 'Wuya', 'Hula', 'To Eat', '6vDIgub6NOc7p6dJfvmvVWaTQE73', 
             1, NULL, 'Action de macher et avaler', 'Ndo wu trafougna bahindru mdrou ya mize'),
-            ('Marcher', 'Hwenda', 'Tsendra', 'Hwendra', 'Hwendra', 'To Walk', '6xhd95Kx3NPkVXKbfuh1LZYFMt83', 
+            ('Marcher', 'Hwenda', 'Tsendra', 'Hwendra', 'Hwendra', 'To Walk', '6vDIgub6NOc7p6dJfvmvVWaTQE73', 
             1, NULL, 'Se déplacer à pied', 'Ndo wu badili makazi ha wurimiya yé mindou');
 

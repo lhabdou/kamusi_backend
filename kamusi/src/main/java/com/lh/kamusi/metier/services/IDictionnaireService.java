@@ -47,7 +47,15 @@ public interface IDictionnaireService {
 	 * @return
 	 * @throws AccessDeniedException 
 	 */
-	List<LigneDictionnaireForm> listerLesMotsAValider(String dialect, String uid) throws AccessDeniedException; 
+	List<LigneDictionnaireForm> listerLesMotsAValider(String dialect, String uid) throws AccessDeniedException;
+
+	/**
+	 * @param ligneDictionnaireForm
+	 * @param uid
+	 * @return
+	 * @throws AccessDeniedException 
+	 */
+	LigneDictionnaireForm ajouterUnMot(LigneDictionnaireForm ligneDictionnaireForm, String uid) throws AccessDeniedException; 
 	
 
 }

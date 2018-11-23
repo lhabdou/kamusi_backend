@@ -70,13 +70,29 @@ public class DictionnaireRestController {
 	 * @return ResponseEntity<LigneDictionnaireForm>
 	 * @throws FirebaseAuthException
 	 */
-	@RequestMapping(value = {"/proposermodification", "/valider" }, method = RequestMethod.PUT)
+	@RequestMapping(value = { "/proposermodification", "/valider" }, method = RequestMethod.PUT)
 	public ResponseEntity<LigneDictionnaireForm> validerOuProposerModification(
 			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token)
 			throws FirebaseAuthException {
 
 		String uid = firebaseVerification.getUserIdFromIdToken(token);
 		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm, uid),
+				HttpStatus.OK);
+	}
+
+	/**
+	 * @param ligneDictionnaireForm
+	 * @return ResponseEntity<LigneDictionnaireForm>
+	 * @throws FirebaseAuthException
+	 * @throws AccessDeniedException 
+	 */
+	@RequestMapping(value = {"/ajoutermot"}, method = RequestMethod.POST)
+	public ResponseEntity<LigneDictionnaireForm> ajouterUnMot(@RequestBody LigneDictionnaireForm ligneDictionnaireForm,
+			@RequestHeader("token") String token) throws FirebaseAuthException, AccessDeniedException {
+
+		String uid = firebaseVerification.getUserIdFromIdToken(token);
+		
+		return new ResponseEntity<>(dictionnaireServices.ajouterUnMot(ligneDictionnaireForm, uid),
 				HttpStatus.OK);
 	}
 

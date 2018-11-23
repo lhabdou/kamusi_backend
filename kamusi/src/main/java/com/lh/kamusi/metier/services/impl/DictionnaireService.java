@@ -301,4 +301,21 @@ public class DictionnaireService implements IDictionnaireService {
 		this.dictionnaireRepository = dictionnaireRepository;
 	}
 
+	@Override
+	public LigneDictionnaireForm ajouterUnMot(LigneDictionnaireForm ligneDictionnaireForm, String uid) throws AccessDeniedException {
+		
+		UtilisateurEntite userEntite = utilisateurRepository.getUserIfExist(uid);
+		LigneDictionnaireEntite motAjoute; 
+		
+		if (RolesStatuts.ROLE_ADMIN.getValue().equalsIgnoreCase(userEntite.getRole().getNom_role())) {
+
+			motAjoute = dictionnaireRepository.save(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaireForm));
+		
+		} else {
+			throw new AccessDeniedException("Accès refusé");
+		}
+
+		return dictionnaireEntiteToDictionnaireForm.convert(motAjoute);
+	}
+
 }

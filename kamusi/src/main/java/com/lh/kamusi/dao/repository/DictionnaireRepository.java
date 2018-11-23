@@ -45,6 +45,6 @@ public interface DictionnaireRepository extends JpaRepository<LigneDictionnaireE
 			+ "inner join fetch u.role "
 			+ "where lower(u.idUtilisateur) = :uid") 
 	List<LigneDictionnaireEntite> listerLesMotsParUserId (@Param("uid") String uid); 
-	
+		
 	
 }
