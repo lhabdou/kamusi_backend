@@ -133,9 +133,14 @@ public class UtilisateurRestController {
 	 * @throws FirebaseAuthException
 	 */
 	@RequestMapping(value = "/utilisateurs/profil", method = RequestMethod.GET)
-	public ResponseEntity<UtilisateurForm> getProfileUtilisateur(@RequestHeader(value = "token") String token)
+	public ResponseEntity<UtilisateurForm> getProfileUtilisateur(@RequestHeader(value = "token") String token, @RequestHeader(value = "uid") String uid)
 			throws FirebaseAuthException {
-		String uid = firebaseVerification.getUserIdFromIdToken(token);
+		
+		if(uid == null) {
+			
+			uid = firebaseVerification.getUserIdFromIdToken(token);
+		}
+		
 		
 		UtilisateurForm userForm = utilisateurService.getProfileUtilisateur(uid);
 
