@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.lh.kamusi.rest.CryptPW.BCryptManagerUtil;
+
 @Entity
 @Table(name = "Utilisateur")
 public class UtilisateurEntite implements Serializable {
@@ -21,7 +23,7 @@ public class UtilisateurEntite implements Serializable {
 	private static final long serialVersionUID = -7966650235494300375L;
 
 	@Id
-	@Column(name="id_utilisateur", nullable=false)
+	@Column(name = "id_utilisateur", nullable = false)
 	private String idUtilisateur;
 
 	@Column(name = "nom")
@@ -32,17 +34,23 @@ public class UtilisateurEntite implements Serializable {
 
 	@Column(name = "pseudo")
 	private String pseudo;
-	
+
 	@Column(name = "tel")
 	private String tel;
-	
+
 	@Column(name = "email", unique = true)
 	private String email;
 	
+	@Column(name = "email_verifie")
+	private Boolean emailVerifie;
+
+	@Column(name = "password", nullable = false)
+	private String password;
+
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pays")
 	private PaysEntite pays;
-	
+
 	@Column(name = "google_connect")
 	private boolean googleConnect;
 
@@ -52,7 +60,7 @@ public class UtilisateurEntite implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_role")
 	private RoleEntite role;
-	
+
 	@Column(name = "compteur")
 	private Integer compteur;
 
@@ -125,7 +133,6 @@ public class UtilisateurEntite implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	/**
 	 * @return the urlImage
@@ -209,6 +216,36 @@ public class UtilisateurEntite implements Serializable {
 	 */
 	public void setCompteur(Integer compteur) {
 		this.compteur = compteur;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		if (!password.isEmpty()) {
+			this.password = BCryptManagerUtil.passwordencoder().encode(password);
+		}
+	}
+
+	/**
+	 * @return the emailVerifie
+	 */
+	public Boolean getEmailVerifie() {
+		return emailVerifie;
+	}
+
+	/**
+	 * @param emailVerifie the emailVerifie to set
+	 */
+	public void setEmailVerifie(Boolean emailVerifie) {
+		this.emailVerifie = emailVerifie;
 	}
 	
 	

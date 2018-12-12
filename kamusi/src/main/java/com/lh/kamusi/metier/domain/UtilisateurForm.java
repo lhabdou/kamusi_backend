@@ -3,13 +3,21 @@
  */
 package com.lh.kamusi.metier.domain;
 
-import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.lh.kamusi.rest.CryptPW.BCryptManagerUtil;
 
 /**
  * @author asoilihi
  *
  */
-public class UtilisateurForm implements Serializable {
+public class UtilisateurForm implements UserDetails {
 	
 	
 	/**
@@ -28,6 +36,10 @@ public class UtilisateurForm implements Serializable {
 	private String tel;
 	
 	private String email;
+	
+	private Boolean emailVerifie;
+	
+	private String password;
 	
 	private PaysForm pays;
 	
@@ -127,6 +139,14 @@ public class UtilisateurForm implements Serializable {
 	public RoleForm getRole() {
 		return role;
 	}
+	
+	/**
+	 * @return the roles
+	 */
+	public List<RoleForm> getRoles() {
+		
+		return Arrays.asList(getRole());
+	}
 
 	/**
 	 * @param role the role to set
@@ -176,5 +196,68 @@ public class UtilisateurForm implements Serializable {
 	public void setPays(PaysForm pays) {
 		this.pays = pays;
 	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		if (!password.isEmpty()) {
+            this.password = BCryptManagerUtil.passwordencoder().encode(password);
+        }
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(this.role.getRole());
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
+
+	/**
+	 * @return the emailVerifie
+	 */
+	public Boolean getEmailVerifie() {
+		return emailVerifie;
+	}
+
+	/**
+	 * @param emailVerifie the emailVerifie to set
+	 */
+	public void setEmailVerifie(Boolean emailVerifie) {
+		this.emailVerifie = emailVerifie;
+	}
+	
+	
 	
 }
