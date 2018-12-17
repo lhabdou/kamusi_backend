@@ -39,7 +39,7 @@ public class UtilisateurEntite implements Serializable {
 	@Column(name = "email", unique = true)
 	private String email;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "pays")
 	private PaysEntite pays;
 	

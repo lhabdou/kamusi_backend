@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.lh.kamusi.metier.converter.UserRecordConvertToUserForm;
 import com.lh.kamusi.metier.domain.UtilisateurForm;
 import com.lh.kamusi.metier.services.IUtilisateurService;
-import com.lh.kamusi.rest.firebase.FirebaseVerification;
 
 /**
  * @author asoilihi
@@ -39,20 +35,6 @@ public class UtilisateurRestController {
 	 */
 	@Autowired
 	private IUtilisateurService utilisateurService;
-
-	/**
-	 * le service firebase
-	 */
-	@Autowired
-	private FirebaseVerification firebaseVerification;
-	
-	
-	/**
-	 * component pour convertir un user google à un user interne
-	 */
-	@Autowired
-	private UserRecordConvertToUserForm userRecorConvertToUserForm;
-	
 
 	/**
 	 * Lister tous les utilisateurs
@@ -88,9 +70,9 @@ public class UtilisateurRestController {
 	 */
 	@RequestMapping(value = "/utilisateurs/nouveau", method = RequestMethod.POST)
 	public ResponseEntity<UtilisateurForm> ajouterUnUtilisateur(@RequestHeader(value = "token") String idToken,
-			@RequestBody UtilisateurForm utilisateurForm) throws FirebaseAuthException {
+			@RequestHeader(value = "uid") String uid, @RequestBody UtilisateurForm utilisateurForm) {
 
-		return enregistrerOuModifierUtilisateur(idToken, utilisateurForm);
+		return enregistrerOuModifierUtilisateur(uid, utilisateurForm);
 
 	}
 
@@ -102,10 +84,10 @@ public class UtilisateurRestController {
 	 * @throws FirebaseAuthException
 	 */
 	@RequestMapping(value = "/utilisateurs/maj", method = RequestMethod.PUT)
-	public ResponseEntity<UtilisateurForm> majUtilisateur(@RequestHeader(value = "token") String idToken,
-			@RequestBody UtilisateurForm utilisateurForm) throws FirebaseAuthException {
+	public ResponseEntity<UtilisateurForm> majUtilisateur(@RequestHeader(value = "token") String idToken, @RequestHeader(value = "uid") String uid,
+			@RequestBody UtilisateurForm utilisateurForm) {
 
-		return enregistrerOuModifierUtilisateur(idToken, utilisateurForm);
+		return enregistrerOuModifierUtilisateur(uid, utilisateurForm);
 
 	}
 
@@ -117,11 +99,9 @@ public class UtilisateurRestController {
 	 * @throws FirebaseAuthException
 	 */
 	@RequestMapping(value = "/utilisateurs/supprimer/{idUser}", method = RequestMethod.DELETE)
-	public void supprimerUnUtilisateur(@RequestHeader(value = "token") String token, 
-			@PathVariable(value="idUser") String idUser) throws FirebaseAuthException {
-		String uid = firebaseVerification.getUserIdFromIdToken(token);
+	public void supprimerUnUtilisateur(@RequestHeader(value = "token") String token,
+			@RequestHeader(value = "uid") String uid, @PathVariable(value = "idUser") String idUser) {
 		utilisateurService.supprimerUtilisateur(uid);
-		FirebaseAuth.getInstance().deleteUser(uid);
 
 	}
 
@@ -132,27 +112,11 @@ public class UtilisateurRestController {
 	 * @return ResponseEntity<UtilisateurForm>
 	 * @throws FirebaseAuthException
 	 */
-	@RequestMapping(value = "/utilisateurs/profil", method = RequestMethod.GET)
-	public ResponseEntity<UtilisateurForm> getProfileUtilisateur(@RequestHeader(value = "token") String token, @RequestHeader(value = "uid") String uid)
-			throws FirebaseAuthException {
-		
-		if(uid == null) {
-			
-			uid = firebaseVerification.getUserIdFromIdToken(token);
-		}
-		
-		
-		UtilisateurForm userForm = utilisateurService.getProfileUtilisateur(uid);
+	@RequestMapping(value = "/utilisateurs/profil", method = RequestMethod.POST)
+	public ResponseEntity<UtilisateurForm> getProfileUtilisateur(@RequestHeader(value = "token") String token,
+			@RequestHeader(value = "uid") String uid, @RequestBody (required = false) UtilisateurForm userFormFr) {
 
-		if (userForm == null) {
-
-			userForm = userRecorConvertToUserForm.convert(firebaseVerification.getUserIdFromUid(uid));
-			utilisateurService.enregistrerUtilisateur(userForm);
-		}
-
-		return new ResponseEntity<>(
-
-				utilisateurService.getProfileUtilisateur(uid), HttpStatus.OK);
+		return new ResponseEntity<>(utilisateurService.getProfileUtilisateur(uid), HttpStatus.OK);
 
 	}
 
@@ -164,23 +128,22 @@ public class UtilisateurRestController {
 	 * @throws FirebaseAuthException
 	 */
 	@RequestMapping(value = "/utilisateurs/modifier", method = RequestMethod.PUT)
-	public ResponseEntity<UtilisateurForm> modifierUnUtilisateur(@RequestHeader(value = "token") String idToken,
-			@RequestBody UtilisateurForm utilisateurForm) throws FirebaseAuthException {
+	public ResponseEntity<UtilisateurForm> modifierUnUtilisateur(@RequestHeader(value = "token") String idToken,@RequestHeader(value = "uid") String uid,
+			@RequestBody UtilisateurForm utilisateurForm)  {
 
-		return enregistrerOuModifierUtilisateur(idToken, utilisateurForm);
+		return enregistrerOuModifierUtilisateur(uid, utilisateurForm);
 
 	}
 
 	/**
-	 * @param idToken
+	 * @param id
 	 * @param utilisateurForm
 	 * @return ResponseEntity<UtilisateurForm>
 	 * @throws FirebaseAuthException
 	 */
-	private ResponseEntity<UtilisateurForm> enregistrerOuModifierUtilisateur(String idToken,
-			UtilisateurForm utilisateurForm) throws FirebaseAuthException {
-		
-		utilisateurForm.setIdUtilisateur(firebaseVerification.getUserIdFromIdToken(idToken));
+	private ResponseEntity<UtilisateurForm> enregistrerOuModifierUtilisateur(String uid, UtilisateurForm utilisateurForm) {
+
+		utilisateurForm.setIdUtilisateur(uid);
 
 		return new ResponseEntity<>(utilisateurService.enregistrerUtilisateur(utilisateurForm), HttpStatus.OK);
 	}

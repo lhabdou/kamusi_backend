@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Pays")
-public class PaysEntite implements Serializable {
+public class PaysEntite implements Serializable, Comparable<PaysEntite> {
 
 	/**
 	 * 
@@ -49,6 +49,14 @@ public class PaysEntite implements Serializable {
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	@Override
+	public int compareTo(PaysEntite p) {
+		if (getNom() == null || p.getNom() == null) {
+		      return 0;
+		    }
+		    return getNom().compareTo(p.getNom());
 	}
 
 }

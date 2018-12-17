@@ -38,7 +38,7 @@ public class PaysService implements IPaysService {
 	@Override
 	public List<PaysForm> listerLesPays() {
 
-		return paysEntiteToPaysForm.convertList(paysRepository.findAll());
+		return paysEntiteToPaysForm.convertList(paysRepository.getAllCountry());
 	}
 
 }

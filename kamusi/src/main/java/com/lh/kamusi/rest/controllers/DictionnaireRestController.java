@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.firebase.auth.FirebaseAuthException;
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
 import com.lh.kamusi.metier.services.IDictionnaireService;
-import com.lh.kamusi.rest.firebase.FirebaseVerification;
 
 @RestController
 @CrossOrigin("http://localhost:8100")
@@ -30,8 +28,6 @@ public class DictionnaireRestController {
 	 */
 	@Autowired
 	private IDictionnaireService dictionnaireServices;
-	@Autowired
-	private FirebaseVerification firebaseVerification;
 
 	/**
 	 * lister les mots en français en fonction d'un mot clé
@@ -57,10 +53,9 @@ public class DictionnaireRestController {
 	 */
 	@RequestMapping(value = "/listerpropositions", method = RequestMethod.GET)
 	public ResponseEntity<List<LigneDictionnaireForm>> listerLesMotsAValider(
-			@RequestHeader(value = "dialect") String dialect, @RequestHeader(value = "token") String token)
-			throws FirebaseAuthException, AccessDeniedException {
+			@RequestHeader(value = "dialect") String dialect, @RequestHeader(value = "token") String token,
+			@RequestHeader(value = "uid") String uid) throws AccessDeniedException {
 
-		String uid = firebaseVerification.getUserIdFromIdToken(token);
 		return new ResponseEntity<>(dictionnaireServices.listerLesMotsAValider(dialect, uid), HttpStatus.OK);
 
 	}
@@ -72,10 +67,9 @@ public class DictionnaireRestController {
 	 */
 	@RequestMapping(value = { "/proposermodification", "/valider" }, method = RequestMethod.PUT)
 	public ResponseEntity<LigneDictionnaireForm> validerOuProposerModification(
-			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token)
-			throws FirebaseAuthException {
+			@RequestBody LigneDictionnaireForm ligneDictionnaireForm, @RequestHeader("token") String token,
+			@RequestHeader(value = "uid") String uid) {
 
-		String uid = firebaseVerification.getUserIdFromIdToken(token);
 		return new ResponseEntity<>(dictionnaireServices.modifierUneLigneDictionnaire(ligneDictionnaireForm, uid),
 				HttpStatus.OK);
 	}
@@ -84,16 +78,14 @@ public class DictionnaireRestController {
 	 * @param ligneDictionnaireForm
 	 * @return ResponseEntity<LigneDictionnaireForm>
 	 * @throws FirebaseAuthException
-	 * @throws AccessDeniedException 
+	 * @throws AccessDeniedException
 	 */
-	@RequestMapping(value = {"/ajoutermot"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "/ajoutermot" }, method = RequestMethod.POST)
 	public ResponseEntity<LigneDictionnaireForm> ajouterUnMot(@RequestBody LigneDictionnaireForm ligneDictionnaireForm,
-			@RequestHeader("token") String token) throws FirebaseAuthException, AccessDeniedException {
+			@RequestHeader("token") String token, @RequestHeader(value = "uid") String uid)
+			throws AccessDeniedException {
 
-		String uid = firebaseVerification.getUserIdFromIdToken(token);
-		
-		return new ResponseEntity<>(dictionnaireServices.ajouterUnMot(ligneDictionnaireForm, uid),
-				HttpStatus.OK);
+		return new ResponseEntity<>(dictionnaireServices.ajouterUnMot(ligneDictionnaireForm, uid), HttpStatus.OK);
 	}
 
 }
