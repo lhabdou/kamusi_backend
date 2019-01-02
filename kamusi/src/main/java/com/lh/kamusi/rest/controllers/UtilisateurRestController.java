@@ -21,10 +21,6 @@ import com.lh.kamusi.metier.services.IUtilisateurService;
  * @author asoilihi
  *
  */
-/**
- * @author asoilihi
- *
- */
 @RestController
 @CrossOrigin("http://localhost:8100")
 @RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
