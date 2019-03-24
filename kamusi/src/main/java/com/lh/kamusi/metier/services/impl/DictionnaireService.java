@@ -22,6 +22,7 @@ import com.lh.kamusi.metier.converter.DictionnaireEntiteToDictionnaireForm;
 import com.lh.kamusi.metier.converter.DictionnaireFormToDictionnaireEntite;
 import com.lh.kamusi.metier.converter.UtilisateurEntiteToUtilisateurForm;
 import com.lh.kamusi.metier.domain.LigneDictionnaireForm;
+import com.lh.kamusi.metier.domain.StatutForm;
 import com.lh.kamusi.metier.services.IDictionnaireService;
 import com.lh.kamusi.metier.services.impl.enumerateur.RolesStatuts;
 
@@ -113,7 +114,10 @@ public class DictionnaireService implements IDictionnaireService {
 	@Override
 	public LigneDictionnaireForm validerUneLigneDictionnaire(LigneDictionnaireForm ligneDictionnaire,
 			Boolean motComModifie) {
-
+		StatutForm statutFormValide  = new StatutForm();
+		statutFormValide.setIdStatut(RolesStatuts.STATUT_VALIDE.getId());
+		statutFormValide.setStatut(RolesStatuts.STATUT_VALIDE.getValue());
+		ligneDictionnaire.setStatut(statutFormValide);
 		LigneDictionnaireForm ligneDictionnaireForm = null;
 
 		if (motComModifie) {
@@ -129,6 +133,10 @@ public class DictionnaireService implements IDictionnaireService {
 					dictionnaireRepository.save(dictionnaireFormToDictionnaireEntite.convert(ligneDictionnaire)));
 
 		}
+		//on vide la ligne validee
+		
+		dictionnaireTempRepository.delete(dictionnaireFormToDictionnaireEntite.convertTemp(ligneDictionnaire));
+		
 		return ligneDictionnaireForm;
 	}
 
@@ -206,11 +214,13 @@ public class DictionnaireService implements IDictionnaireService {
 				ligneDictionnaire.setUtilisateur(utilisateurEntiteToUserForm.convert(user));
 
 			}
-
+			
 			ligneDictionnaire.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
 			ligneDictionnaire.getStatut().setIdStatut(RolesStatuts.STATUT_AVALIDER.getId());
 			ligneDictionnaire.setDateModification(new Date());
-
+			StatutEntite statutEntiteAValider = new StatutEntite();
+			statutEntiteAValider.setId_statut(RolesStatuts.STATUT_AVALIDER.getId());
+			statutEntiteAValider.setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
 			// s'il s'agit d'une suggestion
 
 			if ("sug".equalsIgnoreCase(ligneDictionnaire.getDialectModifie())) {
@@ -219,14 +229,13 @@ public class DictionnaireService implements IDictionnaireService {
 
 			} else {
 				// changer de statut
-				ancienneLigne.setStatut(new StatutEntite());
-				ancienneLigne.getStatut().setId_statut(RolesStatuts.STATUT_AVALIDER.getId());
-				ancienneLigne.getStatut().setStatut(RolesStatuts.STATUT_AVALIDER.getValue());
+				ancienneLigne.setStatut(statutEntiteAValider);
 			}
 
 			dictionnaireRepository.save(ancienneLigne);
 
 			// ajout dans la table temporaire
+			ligneTemp.setStatut(statutEntiteAValider);
 			ligneDictionnaireForm = dictionnaireEntiteToDictionnaireForm
 					.convertTemp(dictionnaireTempRepository.saveAndFlush(ligneTemp));
 

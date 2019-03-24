@@ -22,7 +22,7 @@ import com.lh.kamusi.metier.services.IUtilisateurService;
  *
  */
 @RestController
-@CrossOrigin("http://localhost:8100")
+@CrossOrigin
 @RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UtilisateurRestController {
 

@@ -15,7 +15,7 @@ import com.lh.kamusi.metier.domain.PaysForm;
 import com.lh.kamusi.metier.services.IPaysService;
 
 @RestController
-@CrossOrigin("http://localhost:8100")
+@CrossOrigin
 @RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class PaysRestController {
 

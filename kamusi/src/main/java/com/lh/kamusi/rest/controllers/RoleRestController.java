@@ -16,7 +16,7 @@ import com.lh.kamusi.metier.domain.RoleForm;
 import com.lh.kamusi.metier.services.IRoleService;
 
 @RestController
-@CrossOrigin("http://localhost:8100")
+@CrossOrigin
 @RequestMapping(value = "/kamusi", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class RoleRestController {
 	
